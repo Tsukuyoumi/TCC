@@ -48,7 +48,7 @@
             <button>
                 <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span>ADICIONAR</span>
+                    <span><a href="up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
             <button>

@@ -1,7 +1,6 @@
 <?php
-include_once('../cadastro/logar.php');
-
-// *TODO: $_SESSION['id_usuario'] 
+session_start();
+$id_user = $_SESSION['id_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +52,7 @@ include_once('../cadastro/logar.php');
             <button>
                 <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span>ADICIONAR</span>
+                    <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
             <button>

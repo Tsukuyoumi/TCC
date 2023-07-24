@@ -47,13 +47,13 @@
             <button>
                 <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span>ADICIONAR</span>
+                    <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
             <button>
                 <span>
                     <i class="material-symbols-outlined trans">Person</i>
-                    <span><a href="user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="../user/user.php" id="usuario">USUARIO</a></span>
                 </span>
             </button>
         </nav>
