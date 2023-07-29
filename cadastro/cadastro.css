@@ -37,12 +37,17 @@ form {
   input[type="text"],
   input[type="email"],
   input[type="password"],
-  input[type="nick"] {
+  input[type="nick"]
+  input[type="tipoArt"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
+  }
+  #myTextarea {
+    resize: none; 
+    max-height: 6em; 
   }
 
   #jaTenhoConta {

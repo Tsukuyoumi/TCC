@@ -10,8 +10,10 @@ $nick = $_POST['nick'];
 $senha = $_POST['senha'];
 $perfil = "fotosPerfil/shkajsdskf87349gb.jpg";
 $backFoto = "fotosPerfil/kjmkhinfwvruiiw31.jpg";
+$arte = $_POST['tipoArt'];
+$bio = nl2br($_POST['bio']);
 
-if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)) {
+if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)){
     
     $result = mysqli_query($conexao, "SELECT * FROM users WHERE email = '$email'");
     if (mysqli_num_rows($result) > 0) {
@@ -21,7 +23,7 @@ if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)) {
         if (mysqli_num_rows($result) > 0) {
             echo "<script> alert('O nome já existe. Por favor, tente novamente com outro nome.'); </script>";
         } else {
-            $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha,perfil,backFoto) VALUES ('$nome','$email','$nick','$senha','$perfil','$backFoto')");
+            $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha,perfil,backFoto,tipoArt,bio) VALUES ('$nome','$email','$nick','$senha','$perfil','$backFoto','$arte','$bio')");
             header('Location: ../paginaPrincipal.php');
         }
     }
@@ -43,6 +45,8 @@ if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)) {
     <link rel="stylesheet" href="cadastro.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
     <title>Lunar</title>
+    <script src="cadastro.js"></script>
+
 </head>
 <body>
 
@@ -51,16 +55,24 @@ if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)) {
 	<h1>cadastrar</h1>
 	<form method="POST" action="cadastro.php" enctype="multipart/form-data">
 		<label for="nome">Nome:</label>
-		<input type="text" name="nome" placeholder="nome">
+		<input type="text" name="nome" placeholder="Nome">
 		<br>
 		<label for="email">E-mail:</label>
-		<input type="email" name="email" placeholder="email">
+		<input type="email" name="email" placeholder="E-mail">
 		<br>
         <label for="telefone">Nick name:</label>
-		<input type="text" name="nick" placeholder="nick">
+		<input type="text" name="nick" placeholder="Nick">
 		<br>
         <label for="senha">Senha:</label>
-		<input type="password" name="senha" placeholder="senha">
+		<input type="password" name="senha" placeholder="No maximo 20 caracteres">
+        <br>
+        <label for="tipoArt">Tipo de arte:</label>
+        <input type="Text" name="tipoArt" placeholder="Escreva o tipo da sua arte principal">
+        <br>
+        <label for="tipoArt">Fale sobre você:</label>
+        <textarea id="myTextarea" rows="6" cols="57" name="bio" placeholder="Fale um pouco sobre você! <br> no maximo 5 linhas"></textarea>
+        <p></p>
+
 		<input class="enviar" type="submit" name="submit" value="Enviar">
 	</form>
 

@@ -53,7 +53,7 @@
             <button>
                 <span>
                     <i class="material-symbols-outlined trans">Person</i>
-                    <span><a href="../user/user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="../users/user.php" id="usuario">USUARIO</a></span>
                 </span>
             </button>
         </nav>

@@ -1,6 +1,7 @@
 <?php
-session_start();
-$id_user = $_SESSION['id_usuario'];
+include_once('../cadastro/conexao.php');
+include_once('buscardado.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -10,12 +11,12 @@ $id_user = $_SESSION['id_usuario'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="user.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
     <title>Lunar</title>
+
 </head>
 
 <body>
@@ -63,8 +64,27 @@ $id_user = $_SESSION['id_usuario'];
             </button>
         </nav>
     </aside>
-    <article>
-        
+    <article class="principal">
+    <div class="Perfil">
+    <div class="area-imagem">
+        <img src="<?php echo $backFoto; ?>" alt="background">
+    </div>
+    <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil">
+
+    <h3><?php echo $nome; ?>
+    <h2><?php echo "🌘" . $tipoArt; ?></h2>
+
+    <p class="F">Seguidores:</p>
+    <p class="S">Seguindo:</p>
+
+    <button class="seguir">Seguir</button>
+    <button class="conversar">Conversar</button>
+
+    <p class="bio" id="bio">
+        <?php print  $bio; ?>
+    </p>
+    </div>
+
     </article>
 
 </body>
