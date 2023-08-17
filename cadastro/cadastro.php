@@ -48,7 +48,6 @@ if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)){
     <script src="cadastro.js"></script>
 
 </head>
-<body>
 
     <img id="logo" src="../icones/iconinho.png" alt="logo">
 

@@ -61,6 +61,7 @@ aside {
     padding: 7px 16px 0 9px;
     border-radius: 24px;
     line-height: 1;
+    margin-left: 20px;
 }
 
 .links button>span>span {
@@ -80,6 +81,17 @@ aside {
 .links a {
     color: white;
     text-decoration: none;
+}
+
+/*Botão do usuario no fim*/
+.links button:nth-last-child(1) {
+    margin-top: 70px;
+}
+
+.perfil{
+width: 40px; 
+border-radius: 25px;
+margin-top: -6px;
 }
 
 /*Conteudo*/
@@ -125,3 +137,8 @@ article {
     }
 }
 
+@media (width < 1366px) {
+    article{
+        margin-left: 210px;
+    }
+}

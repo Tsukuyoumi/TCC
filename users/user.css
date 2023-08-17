@@ -46,6 +46,7 @@ aside {
     padding: 7px 16px 0 9px;
     border-radius: 24px;
     line-height: 1;
+    margin-left: 20px;
 }
 
 .links button>span>span {
@@ -79,92 +80,172 @@ article {
     background-color: rgb(26, 26, 26);
 }
 
-.area-imagem{
+.area-imagem {
     width: 1133px;
-    height: 200px; 
+    height: 200px;
     overflow: hidden;
     position: relative;
 }
+
 .area-imagem img {
     width: 100%;
-    height: 100%; 
-    object-fit: cover; 
+    height: 100%;
+    object-fit: cover;
 }
-.perfil{
-    position: absolute; 
-    width: 120px; 
-    height: 120px; 
+
+.perfil {
+    position: absolute;
+    display: flex;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    top: 170px; 
+    top: 170px;
     left: 250px;
     border: 2px black solid
 }
-h3{
+
+h3 {
+    display: flex;
     font-family: "Calistoga", sans-serif;
     position: absolute;
     left: 380px;
-    top:185px;
+    top: 185px;
     font-size: 30px;
 }
-h2{
+
+h2 {
+    display: flex;
     position: absolute;
     left: 380px;
-    top:230px;
+    top: 230px;
     font-size: 20px;
     color: lightgray;
 }
-.seguir{
+
+.F {
+    display: flex;
     position: absolute;
-    background-color: #ffbb00;
-    border: none;
-    width: 120px;
-    height: 40px;
-    border-radius: 5px;
+    top: 207px;
+    left: 970px;
     font-weight: bold;
-    top: 220px;
+    font-size: 20px;
+}
+
+.G {
+    display: flex;
+    position: absolute;
+    top: 207px;
+    left: 850px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.S {
+    display: flex;
+    position: absolute;
+    top: 207px;
+    left: 640px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.C {
+    display: flex;
+    position: absolute;
+    top: 223px;
+    left: 1060px;
+    background-color: #ffbb00;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.DS a{
+    display: flex;
+    position: absolute;
+    top: 223px;
     left: 1200px;
-    font-weight: bold;
-}
-.conversar{
-    position: absolute;
     background-color: #ffbb00;
+    padding: 10px 20px;
     border: none;
-    width: 120px;
-    height: 40px;
     border-radius: 5px;
-    font-weight: bold;
-    top: 220px;
-    left: 1070px;
-    font-weight: bold;
+    cursor: pointer;
 }
-.F{
-    position: absolute;
-    top: 207px;
-    left: 870px;
-    font-weight: bold;
-    font-size: 20px;
+.DS a{
+    text-decoration: none;
+    color: inherit;
+    color: black;
 }
-.S{
-    position: absolute;
-    top: 207px;
-    left: 670px;
-    font-weight: bold;
-    font-size: 20px;
-}
-.bio{
+
+.bio {
+    display: flex;
     position: absolute;
     top: 290px;
     left: 250px;
     font-size: 17px;
 }
-.Perfil{
-    border-bottom: 1px solid #ccc;  
+
+.linha {
+    border-bottom: 1px solid #ccc;
+}
+
+.Perfil {
     padding-bottom: 205px;
+}
+
+/*Botão do usuario no fim*/
+.links button:nth-last-child(1) {
+    margin-top: 70px;
+}
+
+.perfil2 {
+    width: 40px;
+    border-radius: 25px;
+    margin-top: -6px;
+}
+
+/*imagem*/
+.result-item.post {
+    width: 257px;
+    height: 500px;
+    padding: 5px;
+    margin-top: 10px;
+    /* Espaçamento entre as imagens e a bio */
+}
+
+.result-item.post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.imagens {
+    position: relative;
+    display: inline-block;
+    top: 10px;
+    /* Ajuste a distância vertical conforme necessário */
+    margin-left: 210px;
+    display: flex;
+    /* Adicionado o display flex */
+    flex-wrap: wrap;
+    /* Certifique-se de que os itens flexíveis possam quebrar linha conforme necessário */
+    gap: 5px;
+    /* Adiciona um espaçamento entre as imagens */
+}
+
+.imagens p {
+    margin-left: 10px;
+    font-family: "Calistoga", sans-serif;
 }
 
 /*ajuste sidebar*/
 
-@media (width < 1020px) {
+@media (max-width: 1020px) {
+
+    /* Alterei "width" para "max-width" */
     aside {
         width: 70px;
     }
@@ -191,5 +272,31 @@ h2{
         width: 100%;
         padding: 10% 0% 20% 0%;
         margin-left: -4px;
+    }
+}
+
+@media (max-width: 1366px) {
+
+    /* Alterei "width" para "max-width" */
+    .area-imagem {
+        width: 1088px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .area-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    article {
+        margin-left: 210px;
+    }
+
+    .conversar {
+        position: absolute;
+        left: 1180px;
     }
 }

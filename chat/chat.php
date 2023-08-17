@@ -1,3 +1,4 @@
+<?php include_once("../buscardado.php");?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,10 @@
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">Person</i>
+                    <img src="<?php 
+                        include_once('../buscardado.php');
+                        echo "../cadastro/" . $perfil;
+                    ?>" alt="Foto de perfil" class="perfil">
                     <span><a href="../users/user.php" id="usuario">USUARIO</a></span>
                 </span>
             </button>

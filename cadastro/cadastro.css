@@ -58,3 +58,10 @@ form {
     border-radius: 5px;
     cursor: pointer;
   }  
+
+  
+@media (width < 1366px) {
+  article{
+      margin-left: 210px;
+  }
+}
