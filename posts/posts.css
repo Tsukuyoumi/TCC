@@ -5,7 +5,6 @@ body {
 
 /*Sidebar*/
 aside {
-    background-color: rgb(15, 15, 15);
     position: fixed;
     top: 0;
     display: flex;
@@ -26,20 +25,6 @@ aside {
     width: 100%;
     min-height: 35px;
     margin-left: -5px;
-}
-
-.logar{
-    position: absolute;
-    margin-left: 82%;
-    top: 2%;
-}
-.login{
-    background-color: #ff9900;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .links button {
@@ -78,39 +63,80 @@ aside {
     transition: 0.2s;
 }
 
-.links a {
+a {
     color: white;
     text-decoration: none;
+    color: inherit;
+
 }
+#usuario{
+    font-size: 20px;
+}
+
+
+/*conteudo*/
+article {
+    display: flex;
+    flex-direction: row;
+    margin-left: 211px;
+    width: 84%;
+    height: 100%;
+    top: 0;
+    transition: all 0.50s;
+    background-color: rgb(26, 26, 26);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post{
+    display: flex;
+    padding: 10px;
+}
+
+.post img{
+    width: 800px;
+    border-radius: 10px;
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-left: 830px;
+}
+.texto p{
+    margin-bottom: 40px;
+}
+.perfil {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 1050px;
+    top: 150px;
+    padding: 10px;
+}
+
+.perfil img {
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+}
+
 
 /*Botão do usuario no fim*/
 .links button:nth-last-child(1) {
     margin-top: 70px;
 }
 
-.perfil{
-width: 40px; 
-border-radius: 25px;
-margin-top: -6px;
-}
-#usuario{
-    font-size: 20px;
+.perfil2 {
+    width: 40px;
+    border-radius: 25px;
+    margin-top: -6px;
 }
 
-/*Conteudo*/
-article {
-    display: flex;
-    flex-direction: row;
-    margin-left: 220px;
-    width: 84%;
-    height: 100%;
-    top: 0;
-    transition: all 0.50s;
-}
+/*Conversão*/
+@media (max-width: 1020px) {
 
-/*ajuste sidebar*/
-
-@media (width < 1020px) {
+    /* Alterei "width" para "max-width" */
     aside {
         width: 70px;
     }
@@ -140,8 +166,53 @@ article {
     }
 }
 
-@media (width < 1366px) {
-    article{
-        margin-left: 210px;
+@media (width< 1312px) {
+
+    /* Alterei "width" para "max-width" */
+    .area-imagem {
+        width: 1075px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .area-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    article {
+        margin-left: 208px;
+    }
+
+    .conversar {
+        position: absolute;
+        left: 1180px;
+    }
+}
+@media (width< 1342px) {
+
+    /* Alterei "width" para "max-width" */
+    .area-imagem {
+        width: 1075px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .area-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    article {
+        margin-left: 208px;
+    }
+
+    .conversar {
+        position: absolute;
+        left: 1180px;
     }
 }

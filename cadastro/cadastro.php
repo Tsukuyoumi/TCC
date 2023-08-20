@@ -1,38 +1,49 @@
 <?php
+session_start(); // Inicia a sessão
 
 if (isset($_POST['submit'])) { 
-    
-include_once('conexao.php');
+    include_once('conexao.php');
 
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$nick = $_POST['nick'];
-$senha = $_POST['senha'];
-$perfil = "fotosPerfil/shkajsdskf87349gb.jpg";
-$backFoto = "fotosPerfil/kjmkhinfwvruiiw31.jpg";
-$arte = $_POST['tipoArt'];
-$bio = nl2br($_POST['bio']);
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $nick = $_POST['nick'];
+    $senha = $_POST['senha'];
+    $perfil = "fotosPerfil/shkajsdskf87349gb.jpg";
+    $backFoto = "fotosPerfil/kjmkhinfwvruiiw31.jpg";
+    $arte = $_POST['tipoArt'];
+    $bio = nl2br($_POST['bio']);
 
-if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)){
-    
-    $result = mysqli_query($conexao, "SELECT * FROM users WHERE email = '$email'");
-    if (mysqli_num_rows($result) > 0) {
-        echo "<script> alert('O email já existe. Por favor, tente novamente com outro email.'); </script>";
-    } else {
-        $result = mysqli_query($conexao, "SELECT * FROM users WHERE nome = '$nome'");
+    // Hash da senha
+    $hashed_senha = password_hash($senha, PASSWORD_DEFAULT);
+
+    if (!empty($nome) && !empty($email) && !empty($nick) && !empty($senha)) {
+        $result = mysqli_query($conexao, "SELECT * FROM users WHERE email = '$email'");
         if (mysqli_num_rows($result) > 0) {
-            echo "<script> alert('O nome já existe. Por favor, tente novamente com outro nome.'); </script>";
+            echo "<script> alert('O email já existe. Por favor, tente novamente com outro email.'); </script>";
         } else {
-            $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha,perfil,backFoto,tipoArt,bio) VALUES ('$nome','$email','$nick','$senha','$perfil','$backFoto','$arte','$bio')");
-            header('Location: ../paginaPrincipal.php');
-        }
-    }
-    
-} else {
-    echo "<script> alert('Todos os campos são obrigatórios'); </script>";
-}
-}
+            $result = mysqli_query($conexao, "SELECT * FROM users WHERE nome = '$nome'");
+            if (mysqli_num_rows($result) > 0) {
+                echo "<script> alert('O nome já existe. Por favor, tente novamente com outro nome.'); </script>";
+            } else {
+                $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha,perfil,backFoto,tipoArt,bio) VALUES ('$nome','$email','$nick','$hashed_senha','$perfil','$backFoto','$arte','$bio')");
+                
+                if ($result) {
+                    $last_inserted_id = mysqli_insert_id($conexao); // Obtém o ID do último usuário inserido
+                    
+                    // Salva o ID do usuário na sessão
+                    $_SESSION['id_usuario'] = $last_inserted_id;
 
+                    // Redireciona para a página principal ou outra página desejada
+                    header('Location: ../paginaPrincipal.php');
+                } else {
+                    echo "<script> alert('Erro ao cadastrar usuário.'); </script>";
+                }
+            }
+        }
+    } else {
+        echo "<script> alert('Todos os campos são obrigatórios'); </script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>

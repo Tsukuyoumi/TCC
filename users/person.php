@@ -1,4 +1,6 @@
 <?php
+include_once('buscardado.php');
+
 if (isset($_GET["id"])) {
     $id_user = $_GET["id"];
 
@@ -9,14 +11,13 @@ if (isset($_GET["id"])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $perfil = "../cadastro/" . $row["perfil"];
+        $perf = "../cadastro/" . $row["perfil"];
         $backFoto = "../cadastro/" . $row["backFoto"];
-        $nome = $row["nick"];
+        $non = $row["nick"];
         $tipoArt = $row["tipoArt"];
         $bio = $row['bio'];
 
         // Verificar se o usuário logado já segue o perfil exibido
-        session_start(); // Inicie a sessão aqui
         $my_id = $_SESSION['id_usuario'];
 
         $sql_verificar_segue = "SELECT id FROM seguidores WHERE seguidor_id = $my_id AND seguindo_id = $id_user";
@@ -127,7 +128,7 @@ if (isset($_GET["id"])) {
             <button>
                 <span>
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    <span><a href="user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="user.php" id="usuario"><?php echo $nome; ?></a></span>
                 </span>
             </button>
         </nav>
@@ -138,21 +139,18 @@ if (isset($_GET["id"])) {
                 <div class="area-imagem">
                     <img src="<?php echo $backFoto; ?>" alt="background">
                 </div>
-                <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil">
+                <img src="<?php echo $perf; ?>" alt="Foto de perfil" class="perfil">
 
                 <h3>
-                    <?php echo $nome; ?>
+                    <?php echo $non; ?>
                 </h3> <!-- Fechamento da tag h3 -->
                 <h2>
                     <?php echo "🌘" . $tipoArt; ?>
                 </h2>
 
-                <p class="G">Seguidores:
-                    <?php echo $num_seguidores; ?>
-                </p>
-                <p class="S">Seguindo:
-                    <?php echo $num_seguindo; ?>
-                </p>
+                <p class="G"><a href="seguidores.php?id=<?php echo $id_user; ?>">Seguidores: <?php echo $num_seguidores; ?></a></p>
+                <p class="S"><a href="seguindo.php?id=<?php echo $id_user; ?>">Seguindo: <?php echo $num_seguindo; ?></a></p>
+
 
                 <div class="DS">
                     <?php
@@ -174,22 +172,34 @@ if (isset($_GET["id"])) {
         </div>
 
     </article>
-    <div class="imagens">
-        <?php
-        if ($posts_result !== false && $posts_result->num_rows > 0) {
-            while ($row = $posts_result->fetch_assoc()) {
-                $post_image = $row['imagem'];
-                $post_date = $row['data'];
+<div class="imagens">
+    <?php
+    if ($posts_result !== false && $posts_result->num_rows > 0) {
+        while ($row = $posts_result->fetch_assoc()) {
+            $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
+            $post_image = $row['imagem'];
+            $post_date = $row['data'];
 
-                echo "<div class='post-item result-item post'>";
-                echo "<img src='../$post_image' alt='Imagem do Post'>";
-                echo "</div>";
-            }
-        } else {
-            echo "<p>Nenhum post encontrado.</p>";
+            echo "<div class='post-item result-item post'>";
+            echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
+            echo "</div>";
         }
-        ?>
-    </div>
+    } else {
+        echo "<p>Nenhum post encontrado.</p>";
+    }
+    ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const postImages = document.querySelectorAll('.post-item img');
+
+        postImages.forEach(img => {
+            img.addEventListener('click', function() {
+                const postId = this.getAttribute('data-id');
+                window.location.href = `../posts/posts.php?id=${postId}`; // Passa o ID como parâmetro na URL
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
-<?php include_once("buscardado.php");?>
+<?php 
+include_once("buscardado.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,15 +57,13 @@
             <button>
                 <span>
                 <img src="<?php echo "cadastro/" . $perfil; ?>" alt="Foto de perfil" class="perfil">
-                    <span><a href="users/user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="users/user.php" id="usuario"><?php echo $nick; ?></a></span>
                 </span>
             </button>
         </nav>
     </aside>
 
-    <article>
-        <h1>Hello World</h1>
-    </article>
+
 
     <script>
         

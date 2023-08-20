@@ -14,6 +14,7 @@ $perfil = "../cadastro/" . $row["perfil"];
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="user.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
     <title>Lunar</title>
@@ -60,7 +61,9 @@ $perfil = "../cadastro/" . $row["perfil"];
             <button>
                 <span>
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    <span><a href="users/user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="user.php" id="usuario">
+                            <?php echo $nome; ?>
+                        </a></span>
                 </span>
             </button>
         </nav>
@@ -80,12 +83,9 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <?php echo "🌘" . $tipoArt; ?>
                 </h2>
 
-                <p class="F">Seguidores:
-                    <?php echo $num_seguidores; ?>
-                </p>
-                <p class="S">Seguindo:
-                    <?php echo $num_seguindo; ?>
-                </p>
+                <p class="F "><a href="seguidores.php?id=<?php echo $id_user; ?>">Seguidores: <?php echo $num_seguidores; ?></a></p>
+                <p class="S"><a href="seguindo.php?id=<?php echo $id_user; ?>">Seguindo: <?php echo $num_seguindo; ?></a></p>
+
 
                 <p class="bio" id="bio">
                     <?php echo $bio; ?>
@@ -95,21 +95,50 @@ $perfil = "../cadastro/" . $row["perfil"];
 
     </article>
     <div class="imagens">
-            <?php
-            if ($posts_result !== false && $posts_result->num_rows > 0) {
-                while ($row = $posts_result->fetch_assoc()) {
-                    $post_image = $row['imagem'];
-                    $post_date = $row['data'];
+    <?php
+    if ($posts_result !== false && $posts_result->num_rows > 0) {
+        while ($row = $posts_result->fetch_assoc()) {
+            $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
+            $post_image = $row['imagem'];
+            $post_date = $row['data'];
 
-                    echo "<div class='post-item result-item post'>"; // Aplica as classes CSS
-                    echo "<img src='../$post_image' alt='Imagem do Post'>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>Nenhum post encontrado.</p>";
-            }
-            ?>
-        </div>
+            echo "<div class='post-item result-item post'>";
+            echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
+            echo "</div>";
+        }
+    } else {
+        echo "<p>Nenhum post encontrado.</p>";
+    }
+    ?>
+<div class="imagens">
+    <?php
+    if ($posts_result !== false && $posts_result->num_rows > 0) {
+        while ($row = $posts_result->fetch_assoc()) {
+            $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
+            $post_image = $row['imagem'];
+            $post_date = $row['data'];
+
+            echo "<div class='post-item result-item post'>";
+            echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
+            echo "</div>";
+        }
+    } else {
+        echo "<p>Nenhum post encontrado.</p>";
+    }
+    ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const postImages = document.querySelectorAll('.post-item img');
+
+        postImages.forEach(img => {
+            img.addEventListener('click', function() {
+                const postId = this.getAttribute('data-id');
+                window.location.href = `../posts/posts.php?id=${postId}`; // Passa o ID como parâmetro na URL
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

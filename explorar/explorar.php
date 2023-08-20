@@ -56,7 +56,9 @@
                     include_once('../buscardado.php');
                     echo "../cadastro/" . $perfil;
                     ?>" alt="Foto de perfil" class="perfil">
-                    <span><a href="../users/user.php" id="usuario">USUARIO</a></span>
+                    <span><a href="../users/user.php" id="usuario">
+                            <?php echo $nick; ?>
+                        </a></span>
                 </span>
             </button>
         </nav>
@@ -68,10 +70,7 @@
             <input type="text" class="search" name="search_name" id="search_name" required>
             <button type="submit" class="button"><i class="material-symbols-outlined trans">Search</i></button>
         </form>
-
-
         <?php
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             include_once('../cadastro/conexao.php'); // Substitua pelo caminho correto para o arquivo de conexão
             $search_name = $_POST['search_name']; // Nome que o usuário digitou
@@ -81,16 +80,16 @@
                 die("Conexão falhou: " . $conexao->connect_error);
             }
 
-            // Consulta SQL para buscar o nome na tabela "users"
-            $user_sql = "SELECT id, nome AS name FROM users WHERE nome LIKE '$search_name%'";
+            // Consulta SQL para buscar o ID na tabela "users"
+            $user_sql = "SELECT id, nick AS name FROM users WHERE nick LIKE '$search_name%'";
             $user_result = $conexao->query($user_sql);
 
-            // Consulta SQL para buscar o nome e imagem na tabela "posts"
-            $post_sql = "SELECT id, imagem AS name FROM posts WHERE nome = '$search_name'";
+            // Consulta SQL para buscar o ID na tabela "posts"
+            $post_sql = "SELECT id, imagem FROM posts WHERE nome LIKE '$search_name%'";
             $post_result = $conexao->query($post_sql);
         }
-
         ?>
+
         <div class="toggle-buttons">
             <button id="toggleUsers" class="toggle-button" onclick="toggleUsers()">Usuários</button>
             <button id="togglePosts" class="toggle-button" onclick="togglePosts()">Artes</button>
@@ -112,38 +111,36 @@
             </div>
         </div>
 
+
         <div id="postResults" class="result-list hidden">
-            <?php
-                if (isset($post_result) && $post_result->num_rows > 0) {
-                    mysqli_data_seek($post_result, 0); // Reinicia o cursor de resultados
-                
-                    while ($row = $post_result->fetch_assoc()) {
-                        if (isset($row["id"]) && isset($row["name"])) {
-                            echo "<div class='result-item post'><img src='../$row[name]'></div>";
-                        }
-                    }
-                } else {
-                    echo "<p class='no-result-message'>Nenhuma arte encontrada!</p>";
-                }
-                ?>
-        </div>
+    <?php
+    if (isset($post_result) && $post_result->num_rows > 0) {
+        while ($row = $post_result->fetch_assoc()) {
+            echo "<div class='result-item post'><a href='../posts/posts.php?id=$row[id]'><img src='../$row[imagem]'></a></div>";
+        }
+    } else {
+        echo "<p class='no-result-message'>Nenhuma arte encontrada!</p>";
+    }
+    ?>
+</div>
+
 
         <script>
-        function toggleUsers() {
-            const userResults = document.getElementById("userResults");
-            const postResults = document.getElementById("postResults");
+            function toggleUsers() {
+                const userResults = document.getElementById("userResults");
+                const postResults = document.getElementById("postResults");
 
-            userResults.classList.remove("hidden");
-            postResults.classList.add("hidden");
-        }
+                userResults.classList.remove("hidden");
+                postResults.classList.add("hidden");
+            }
 
-        function togglePosts() {
-            const userResults = document.getElementById("userResults");
-            const postResults = document.getElementById("postResults");
+            function togglePosts() {
+                const userResults = document.getElementById("userResults");
+                const postResults = document.getElementById("postResults");
 
-            userResults.classList.add("hidden");
-            postResults.classList.remove("hidden");
-        }
+                userResults.classList.add("hidden");
+                postResults.classList.remove("hidden");
+            }
         </script>
 
     </article>

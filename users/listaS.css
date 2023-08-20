@@ -5,7 +5,6 @@ body {
 
 /*Sidebar*/
 aside {
-    background-color: rgb(15, 15, 15);
     position: fixed;
     top: 0;
     display: flex;
@@ -26,20 +25,6 @@ aside {
     width: 100%;
     min-height: 35px;
     margin-left: -5px;
-}
-
-.logar{
-    position: absolute;
-    margin-left: 82%;
-    top: 2%;
-}
-.login{
-    background-color: #ff9900;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .links button {
@@ -78,39 +63,59 @@ aside {
     transition: 0.2s;
 }
 
-.links a {
+a {
     color: white;
     text-decoration: none;
-}
+    color: inherit;
 
+}
+#usuario{
+    font-size: 20px;
+}
 /*Botão do usuario no fim*/
 .links button:nth-last-child(1) {
     margin-top: 70px;
 }
 
-.perfil{
-width: 40px; 
-border-radius: 25px;
-margin-top: -6px;
+.perfil2 {
+    width: 40px;
+    border-radius: 25px;
+    margin-top: -6px;
 }
-#usuario{
-    font-size: 20px;
-}
+
 
 /*Conteudo*/
 article {
     display: flex;
     flex-direction: row;
-    margin-left: 220px;
+    margin-left: 215px;
     width: 84%;
     height: 100%;
     top: 0;
     transition: all 0.50s;
+    background-color: rgb(26, 26, 26);
+}
+h1{
+    margin-left: 10px;
 }
 
-/*ajuste sidebar*/
+.seguidor{
+    display: flex;
+    flex-direction: row;
+    align-items: self-start;
+}
+.seguidor img{
+    width: 40px;
+    border-radius: 30px;
+    padding: 10px;
+}
+.seguidor{
+    font-size: 20px
+}
 
-@media (width < 1020px) {
+@media (max-width: 1020px) {
+
+    /* Alterei "width" para "max-width" */
     aside {
         width: 70px;
     }
@@ -140,8 +145,28 @@ article {
     }
 }
 
-@media (width < 1366px) {
-    article{
+@media (max-width: 1366px) {
+
+    /* Alterei "width" para "max-width" */
+    .area-imagem {
+        width: 1075px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .area-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    article {
         margin-left: 210px;
+    }
+
+    .conversar {
+        position: absolute;
+        left: 1180px;
     }
 }

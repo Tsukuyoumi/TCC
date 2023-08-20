@@ -1,12 +1,19 @@
-<?php 
-include_once("buscardado.php");
+<?php
+include_once('buscardado.php');
 
 if (isset($_GET['id'])) {
     $id_user = $_GET['id'];
 
-    // Consulta SQL para buscar os seguidores
-    $sql_seguidores = "SELECT * FROM seguidores WHERE seguindo_id = $id_user";
-    $result_seguidores = $conexao->query($sql_seguidores);
+    $sql_seguindo = "SELECT * FROM seguidores WHERE seguidor_id = $id_user";
+    $result_seguindo = $conexao->query($sql_seguindo);
+
+    $seguindo_ids = array();
+
+    if ($result_seguindo !== false && $result_seguindo->num_rows > 0) {
+        while ($row = $result_seguindo->fetch_assoc()) {
+            $seguindo_ids[] = $row['seguindo_id']; // Adicione o ID da pessoa seguida ao array
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -18,14 +25,14 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="listaS.css">
-    <link rel="icon" href="icones/iconinho.png" type="image/png">
+    <link rel="icon" href="../icones/iconinho.png" type="image/png">
     <title>Lunar</title>
+
 </head>
 
 <body>
-
     <aside>
         <header id="logo">
             <img class="logo" src="../icones\icone.png" alt="logo">
@@ -72,30 +79,28 @@ if (isset($_GET['id'])) {
     </aside>
     <article class="principal">
         <div class="linha">
-        <h1>Seguidores</h1>
-        <?php
-        if ($result_seguidores !== false && $result_seguidores->num_rows > 0) {
-            while ($row = $result_seguidores->fetch_assoc()) {
-                $seguidor_id = $row['seguidor_id'];
+            <h1>Seguindo</h1>
+            <?php
+            // Reabrir a conexão para buscar informações sobre os usuários seguidos
+            include_once('../cadastro/conexao.php');
 
-                // Consulta SQL para buscar informações do seguidor
-                $sql_info_seguidor = "SELECT nome, nick, perfil FROM users WHERE id = $seguidor_id";
-                $result_info_seguidor = $conexao->query($sql_info_seguidor);
-                $row_info_seguidor = $result_info_seguidor->fetch_assoc();
+            foreach ($seguindo_ids as $seguindo_id) {
+                // Consulta SQL para buscar informações da pessoa seguida
+                $sql_info_seguindo = "SELECT nome, nick, perfil FROM users WHERE id = $seguindo_id";
+                $result_info_seguindo = $conexao->query($sql_info_seguindo);
+                $row_info_seguindo = $result_info_seguindo->fetch_assoc();
 
-                // Exibir informações do seguidor
+                // Exibir informações da pessoa seguida
                 echo '<div class="seguidor">';
-                echo '<img src="../cadastro/' . $row_info_seguidor['perfil'] . '" alt="Foto de perfil">';
-                echo "<div class='result-item name'><a href='person.php?id=$seguidor_id'>$row_info_seguidor[nick]</a></div>";
+                echo '<img src="../cadastro/' . $row_info_seguindo['perfil'] . '" alt="Foto de perfil">';
+                echo "<div class='result-item name'><a href='person.php?id=$seguindo_id'>$row_info_seguindo[nick]</a></div>";
                 echo '</div>';
             }
-        } else {
-            echo "<p>Nenhum seguidor encontrado.</p>";
-        }
-        $conexao->close();
 
-        ?>    </article>
-
-    </body>
+            $conexao->close();
+            ?>
+        </div>
+    </article>
+</body>
 
 </html>

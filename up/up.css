@@ -82,6 +82,10 @@ aside {
     color: white;
     text-decoration: none;
 }
+#usuario{
+    font-size: 20px;
+}
+
 
 /*Conteudo*/
 article {
