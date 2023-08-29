@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
         $row = $posts_result->fetch_assoc();
         $post_image = $row['imagem'];
         $name = $row['nome'];
+        $tipoArt = $row['tipoArt'];
         $desc = $row['descricao'];
         $data = $row['data'];
         $user_id = $row['id_user'];
@@ -105,16 +106,35 @@ if (isset($_GET['id'])) {
     <article class="principal">
         <div class="post">
             <img src="../<?php echo $post_image; ?>" alt="Imagem do Post">
-            <div class="texto">
-                <h1><?php echo $name; ?></h1>
-                <p><?php echo $desc; ?></p>
-            </div>
-            <div class="perfil">
+            <div class="conteudo">
+                <div class="texto">
+                    <h1>
+                        <?php echo $name; ?>
+                    </h1>
+                    <p class="tipo">
+                        <?php echo $tipoArt; ?>
+                    </p>
+                    <p>
+                        <?php echo $desc; ?>
+                    </p>
+                </div>
+                <div class="perfil" id="perfilDiv">
                     <img src="../cadastro/<?php echo $perf; ?>" alt="">
-                    <p style="margin-left: 10px; font-size: 20px; font-weight: bold;"><?php echo $non; ?></p>
+                    <p>
+                        <?php echo $non; ?>
+                    </p>
+                </div>
+
+
             </div>
         </div>
     </article>
+    <script>
+        document.getElementById("perfilDiv").addEventListener("click", function () {
+            window.location.href = "../users/person.php?id=<?php echo $user_id; ?>";
+        });
+    </script>
+
 </body>
 
 </html>

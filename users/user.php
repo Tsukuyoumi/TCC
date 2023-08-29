@@ -110,22 +110,7 @@ $perfil = "../cadastro/" . $row["perfil"];
         echo "<p>Nenhum post encontrado.</p>";
     }
     ?>
-<div class="imagens">
-    <?php
-    if ($posts_result !== false && $posts_result->num_rows > 0) {
-        while ($row = $posts_result->fetch_assoc()) {
-            $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
-            $post_image = $row['imagem'];
-            $post_date = $row['data'];
 
-            echo "<div class='post-item result-item post'>";
-            echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
-            echo "</div>";
-        }
-    } else {
-        echo "<p>Nenhum post encontrado.</p>";
-    }
-    ?>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const postImages = document.querySelectorAll('.post-item img');

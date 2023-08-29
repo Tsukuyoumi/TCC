@@ -1,11 +1,11 @@
 <?php
-    session_start();
-    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)){
-        unset($_SESSION['email']);
-        unset($_SESSION['senha']);
-    }else{
-        header('Location: paginaPrincipal.php');
-    }
+session_start();
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+} else {
+    header('Location: paginaPrincipal.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,12 +71,32 @@
     </aside>
 
     <article>
-        <h1>Hello World</h1>
+        <div class="conteudo">
+        <img class="lua" src="icones\iconinho.png" alt="logo">
+            <div class="Sobre">
+            <h1>Sobre:</h1>
+            <p> &nbsp;&nbsp;&nbsp;Com o crescente aumento do uso das redes sociais para promover artistas vem crescendo
+                ao longo dos anos. Mas em meio a isso vemos artistas ficando presos às poucas ferramentas para ganhar
+                visibilidade, e alcançar cada vez mais pessoas que tenham um gosto artístico parecido com o seu.
+                Tornando o seu crescimento ainda mais lento e dependente de um algoritmo que muitas vezes não mostra
+                seus posts a novas pessoas.
+                O objetivo da Lunar é ser um local com ferramentas, visibilidade e que com o tempo se torne uma grande
+                comunidade de artistas.
+            </p>
+            </div>
+            <h1 id="h1">POSTS</h1>
+            <div class="post">
+            <img class="Foto" src="icones\Ap1.png" alt="logo">
+            <p class="posts"> &nbsp;&nbsp;&nbsp;As duas primeiras colunas são para posts de pessoas a qual você segue.<br>
+                 &nbsp;&nbsp;&nbsp;As duas ultimas colunas são para posts de pessoas a qual você não segue, sendo a primeira de pessoas com grau de visibilidade a cima da media, já a ultima é para pessoas novas terem mais visibilidade.
+            </p>
+            </div>
+        </div>
     </article>
 
     <div class="logar">
         <button class="login" onclick="window.location.href = 'cadastro/login.php'">conectar</button>
-        <button class="login" onclick="window.location.href = 'cadastro/cadastro.php'">cadastrar</button>
+        <button class="logi" onclick="window.location.href = 'cadastro/cadastro.php'">cadastrar</button>
     </div>
 
     <script>

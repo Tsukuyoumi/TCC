@@ -82,7 +82,6 @@ if (isset($_POST['submit'])) {
         <label for="tipoArt">Fale sobre você:</label>
         <textarea id="myTextarea" rows="6" cols="57" name="bio" placeholder="Fale um pouco sobre você! <br> no maximo 5 linhas"></textarea>
         <p></p>
-
 		<input class="enviar" type="submit" name="submit" value="Enviar">
 	</form>
 

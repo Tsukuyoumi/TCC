@@ -49,7 +49,7 @@ if (isset($_GET["id"])) {
         }
 
         // Consulta SQL para buscar os posts do usuário
-        $posts_sql = "SELECT * FROM posts WHERE id_user = '$id_user'";
+        $posts_sql = "SELECT * FROM posts WHERE id_user = '$id_user' ORDER BY data DESC";
         $posts_result = $conexao->query($posts_sql);
 
         $sql_numero_seguidores = "SELECT COUNT(*) AS num_seguidores FROM seguidores WHERE seguindo_id = $id_user";

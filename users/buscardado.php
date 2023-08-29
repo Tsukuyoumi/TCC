@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     $tipoArt = $row["tipoArt"];
     $bio = $row['bio'];
 
-    $posts_sql = "SELECT * FROM posts WHERE id_user = '$id_user'";
+    $posts_sql = "SELECT * FROM posts WHERE id_user = '$id_user' ORDER BY data DESC";
     $posts_result = $conexao->query($posts_sql);
 
     $sql_numero_seguidores = "SELECT COUNT(*) AS num_seguidores FROM seguidores WHERE seguindo_id = $id_user";

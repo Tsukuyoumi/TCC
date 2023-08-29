@@ -79,20 +79,18 @@
 		    <input type="text" name="nome" placeholder="De um titulo à seu post">
 		    <br>
             <label for="nome">Descrição:</label>
-		    <input type="text" name="descricao" placeholder="Descrição">
+            <br>
+            <textarea id="myTextarea" rows="6" cols="57"  name="descricao" placeholder="Fale um pouco sobre O post! <br> no maximo 5 linhas"></textarea>
 		    <br>
             <label for="nome"><h2>Tipo de arte:</h2></label>
 		    <select id="tipo" name="tipo">
 		        <option value="Pintura">Pintura</option>
                 <option value="Desenho">Desenho</option>
 		        <option value="Escultura">Escultura</option>
-		        <option value="ceramica">cerâmica</option>
                 <option value="Foto">Fotografia</option>
-                <option value="Performace">Performance</option>
-                <option value="Performace">Colagens</option>
 	        </select>
             <br>
-            <br>
+            <br><!--
             <label for="checkboxInput" class="custom-checkbox"><h2>Materiais usados:</h2>
 		    <input type="checkbox" name="material" value="Ciências" id="checkboxInput"><span class="checkmark">Lapis</span> 
             <br>
@@ -117,7 +115,7 @@
 		    <input type="checkbox" name="material" value="Ciências" id="checkboxInput"><span class="checkmark">Guache</span> 
             </label>
             <br>
-            <br>
+            <br>-->
             <br>
             <button type="submit">Enviar</button>
         </form>

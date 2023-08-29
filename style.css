@@ -27,18 +27,24 @@ aside {
     min-height: 35px;
     margin-left: -5px;
 }
-
 .logar{
     position: absolute;
-    margin-left: 82%;
-    top: 2%;
+    margin-left: 1050px;
+    padding: 20px;
 }
 .login{
-    background-color: #ff9900;
-    color: white;
-    padding: 10px 20px;
+    background-color: #ffbb00;
     border: none;
-    border-radius: 5px;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+.logi{
+    background-color: #ffbb00;
+    border: none;
+    padding: 18px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -102,10 +108,55 @@ article {
     display: flex;
     flex-direction: row;
     margin-left: 220px;
-    width: 84%;
-    height: 100%;
     top: 0;
     transition: all 0.50s;
+}
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-top: 40px;
+}
+.Sobre{
+    margin-left: 60px;
+    margin-right: 60px;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 20px;
+}
+.lua{
+    width: 300px;
+    margin-left: 350px;
+    margin-top: 80px;
+    margin-bottom: 40px; 
+}
+.Foto{
+    width: 700px;
+    margin-left: 90px;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(136, 136, 136, 0.521);
+    border-radius: 20px;
+}
+.conteudo h1{
+    margin-bottom: 2px;
+}
+.conteudo p{
+    font-size: 20px;
+}
+#h1{
+    margin-left: 480px;
+    margin-top: 60px;
+    margin-bottom: -20px;
+}
+.posts{
+    position: absolute;
+    margin-left: 800px;
+    margin-top: -390px;
+    margin-right: 60px;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 20px;
 }
 
 /*ajuste sidebar*/
