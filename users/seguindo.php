@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -101,6 +101,8 @@ if (isset($_GET['id'])) {
             ?>
         </div>
     </article>
+    <?php include('../Codigos/modalN.php'); ?>
+
 </body>
 
 </html>

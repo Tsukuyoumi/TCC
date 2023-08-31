@@ -40,7 +40,8 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <?php include('../Codigos/modalN.php');?>
+            <button  onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -92,6 +93,9 @@ $perfil = "../cadastro/" . $row["perfil"];
                 </p>
             </div>
         </div>
+        <div class="atualizar">
+            <a href="../cadastro/update/update.php"><img src="../icones/pincel.png" alt="" width="50%"></a>
+        </div>
 
     </article>
     <div class="imagens">
@@ -123,6 +127,7 @@ $perfil = "../cadastro/" . $row["perfil"];
         });
     });
 </script>
+            <?php include('../Codigos/modalN.php'); ?>
 
 </body>
 

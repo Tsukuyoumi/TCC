@@ -1,5 +1,7 @@
 <?php
 include_once('buscardado.php');
+include_once('../Codigos/notificacoes.php');
+
 
 if (isset($_GET["id"])) {
     $id_user = $_GET["id"];
@@ -22,28 +24,32 @@ if (isset($_GET["id"])) {
 
         $sql_verificar_segue = "SELECT id FROM seguidores WHERE seguidor_id = $my_id AND seguindo_id = $id_user";
         $result_verificar_segue = $conexao->query($sql_verificar_segue);
-
         $jaSegue = ($result_verificar_segue->num_rows > 0);
 
-        // Código de seguir e deixar de seguir
-        if ($id_user != $_SESSION['id_usuario']) {
-            if (isset($_GET['action'])) {
-                if ($_GET['action'] == 'follow') {
-                    $sql_follow = "INSERT INTO seguidores (seguidor_id, seguindo_id) VALUES ($_SESSION[id_usuario], $id_user)";
-                    $result_follow = $conexao->query($sql_follow);
-                    if ($result_follow) {
-                        header("Location: person.php?id=$id_user");
-                    } else {
-                        echo "Erro ao seguir o usuário.";
-                    }
-                } elseif ($_GET['action'] == 'unfollow') {
-                    $sql_unfollow = "DELETE FROM seguidores WHERE seguidor_id = $_SESSION[id_usuario] AND seguindo_id = $id_user";
-                    $result_unfollow = $conexao->query($sql_unfollow);
-                    if ($result_unfollow) {
-                        header("Location: person.php?id=$id_user");
-                    } else {
-                        echo "Erro ao deixar de seguir o usuário.";
-                    }
+        if (isset($_GET['action'])) {
+            if ($_GET['action'] == 'follow') {
+                $action = 'follow';
+                $mensagemNotificacao = "Você foi seguido por " . $nome;
+            } elseif ($_GET['action'] == 'unfollow') {
+                $action = 'unfollow';
+                $mensagemNotificacao = "Você foi deixado de seguir por " . $nome;
+            }
+
+            if ($action && $id_user != $_SESSION['id_usuario']) {
+                $sql_follow = "INSERT INTO seguidores (seguidor_id, seguindo_id) VALUES ($_SESSION[id_usuario], $id_user)";
+                $sql_unfollow = "DELETE FROM seguidores WHERE seguidor_id = $_SESSION[id_usuario] AND seguindo_id = $id_user";
+
+                if ($action == 'follow') {
+                    $result_action = $conexao->query($sql_follow);
+                } elseif ($action == 'unfollow') {
+                    $result_action = $conexao->query($sql_unfollow);
+                }
+
+                if ($result_action) {
+                    inserirNotificacao($id_user, $mensagemNotificacao, $conexao);
+                    header("Location: person.php?id=$id_user");
+                } else {
+                    echo "Erro ao realizar ação.";
                 }
             }
         }
@@ -70,7 +76,6 @@ if (isset($_GET["id"])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +112,7 @@ if (isset($_GET["id"])) {
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -170,7 +175,6 @@ if (isset($_GET["id"])) {
                 </p>
             </div>
         </div>
-
     </article>
 <div class="imagens">
     <?php
@@ -199,7 +203,8 @@ if (isset($_GET["id"])) {
             });
         });
     });
+    
 </script>
-</body>
 
+</body>
 </html>

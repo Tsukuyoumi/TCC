@@ -36,7 +36,7 @@ include_once("cadastro/conexao.php");
                     <span><a href="explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -213,6 +213,60 @@ if (!empty($nao_seguindo_ids)) {
 
     echo '</div>';
 }
+$query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
+$result_media_seguidores = $conexao->query($query_media_seguidores);
+$row_media_seguidores = $result_media_seguidores->fetch_assoc();
+$media_seguidores = $row_media_seguidores['media_seguidores'];
+
+// Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está acima da média
+$query_usuarios_acima_media = "
+    SELECT u.id
+    FROM users u
+    WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) > $media_seguidores
+";
+
+$result_usuarios_acima_media = $conexao->query($query_usuarios_acima_media);
+
+$nao_seguindo_ids = array();
+while ($row_usuarios_acima_media = $result_usuarios_acima_media->fetch_assoc()) {
+    $nao_seguindo_ids[] = $row_usuarios_acima_media['id'];
+}
+
+if (!empty($nao_seguindo_ids)) {
+    $in_clause = implode(",", $nao_seguindo_ids);
+
+    // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
+    $query_posts = "
+        SELECT id, imagem, id_user, data
+        FROM posts
+        WHERE id_user IN ($in_clause)
+        ORDER BY data DESC
+    ";
+
+    $result_posts = $conexao->query($query_posts);
+
+    $column = 1;
+    echo '<div class="imagens">';
+
+    while ($row_posts = $result_posts->fetch_assoc()) {
+        echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
+        echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+        echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+        echo '</div>';
+        echo '</a>';
+
+        if ($column == 2) {
+            echo '</div><div class="imagens">';
+        }
+
+        $column = ($column == 1) ? 1 : 1; // Corrigindo a alternância das colunas
+    }
+
+    echo '</div>';
+}
+
+
+ include('Codigos/modalN.php'); 
 ?>
 
 

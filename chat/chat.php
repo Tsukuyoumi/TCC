@@ -1,4 +1,6 @@
-<?php include_once("../buscardado.php");?>
+<?php 
+include_once("../buscardado.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +35,7 @@
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -65,7 +67,7 @@
     <article>
         <h1>Hello World</h1>
     </article>
-
+    <?php include('../Codigos/modalN.php'); ?>
 </body>
 
 </html>

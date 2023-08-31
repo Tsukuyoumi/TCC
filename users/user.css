@@ -239,6 +239,11 @@ h2 {
     margin-left: 10px;
     font-family: "Calistoga", sans-serif;
 }
+.atualizar{
+    position: absolute;
+    top: 34%;
+    margin-left: 78%;
+}
 
 /*Conversão*/
 @media (max-width: 1020px) {

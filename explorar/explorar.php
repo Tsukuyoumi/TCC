@@ -32,7 +32,7 @@
                     <span><a href="explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -144,6 +144,7 @@
         </script>
 
     </article>
+    <?php include('../Codigos/modalN.php'); ?>
 </body>
 
 </html>

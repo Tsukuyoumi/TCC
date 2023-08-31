@@ -34,7 +34,7 @@
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <button>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -129,7 +129,7 @@
 
             reader.onload = function(e) {
             const spanImagem = document.querySelector('.picture__image');
-            spanImagem.textContent = ''; // Limpa o conteúdo anterior
+            spanImagem.textContent = '';
 
             const imagem = new Image();
             imagem.src = e.target.result;
@@ -142,6 +142,7 @@
         }
      });
     </script>
+            <?php include('../Codigos/modalN.php'); ?>
 
 </body>
 </html>
