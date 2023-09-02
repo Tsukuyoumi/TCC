@@ -275,11 +275,7 @@ include_once("cadastro/conexao.php");
 
                     echo '</div>';
                 }
-            }
-        }
-
-
-        $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
+                $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
         $result_media_seguidores = $conexao->query($query_media_seguidores);
         $row_media_seguidores = $result_media_seguidores->fetch_assoc();
         $media_seguidores = $row_media_seguidores['media_seguidores'];
@@ -331,8 +327,8 @@ include_once("cadastro/conexao.php");
             echo '</div>';
         }
 
-
-
+            }
+        }
         include('Codigos/modalN.php');
         ?>
 

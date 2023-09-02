@@ -68,21 +68,26 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
         <div class="conteudo">
         <img class="lua" src="icones\iconinho.png" alt="logo">
             <div class="Sobre">
-            <h1>Sobre:</h1>
-            <p> &nbsp;&nbsp;&nbsp;Com o crescente aumento do uso das redes sociais para promover artistas vem crescendo
+                <h1>Sobre:</h1>
+                <p> &nbsp;&nbsp;&nbsp;Com o crescente aumento do uso das redes sociais para promover artistas vem crescendo
                 ao longo dos anos. Mas em meio a isso vemos artistas ficando presos às poucas ferramentas para ganhar
                 visibilidade, e alcançar cada vez mais pessoas que tenham um gosto artístico parecido com o seu.
                 Tornando o seu crescimento ainda mais lento e dependente de um algoritmo que muitas vezes não mostra
                 seus posts a novas pessoas.
                 O objetivo da Lunar é ser um local com ferramentas, visibilidade e que com o tempo se torne uma grande
                 comunidade de artistas.
-            </p>
+                </p>
             </div>
-            <h1 id="h1">POSTS</h1>
+                <h1 id="h1">POSTS</h1>
+            <br>            <br>
+
+            <div class="Sobre">
+                <p>Ao primeiro momento em que você entra na pagina, pelo fato de não seguir niguem o ststema opta por te mostar 2 colunas de posts de pessoas que estão a cima da media de seguidores e as outras duas de pessoas a baixo damedia de seguidores </p>
+            </div>
             <div class="post">
-            <img class="Foto" src="icones\Ap1.png" alt="logo">
-            <p class="posts"> &nbsp;&nbsp;&nbsp;As duas primeiras colunas são para posts de pessoas a qual você segue.<br>
-                 &nbsp;&nbsp;&nbsp;As duas ultimas colunas são para posts de pessoas a qual você não segue, sendo a primeira de pessoas com grau de visibilidade a cima da media, já a ultima é para pessoas novas terem mais visibilidade.
+                <img class="Foto" src="icones\Ap1.png" alt="logo">
+                <p class="posts"> &nbsp;&nbsp;&nbsp;As duas primeiras colunas são para posts de pessoas a qual você segue.<br>
+                     &nbsp;&nbsp;&nbsp;As duas ultimas colunas são para posts de pessoas a qual você não segue, sendo a primeira de pessoas com grau de visibilidade a cima da media, já a ultima é para pessoas novas terem mais visibilidade.
             </p>
             </div>
         </div>
