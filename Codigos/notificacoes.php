@@ -11,6 +11,19 @@ function inserirNotificacao($user_id, $mensagem, $conexao) {
         return false;
     }
     
-    $conexao->close();
 }
+function novaNotificacao($user_id, $mensagem, $conexao) {
+
+    $mensagem = $conexao->real_escape_string($mensagem);
+
+    $sql = "INSERT INTO notifications (user_id, mensagem, lida) VALUES ('$user_id', '$mensagem', 0)";
+    if ($conexao->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+
+
 ?>

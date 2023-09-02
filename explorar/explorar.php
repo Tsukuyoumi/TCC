@@ -40,22 +40,15 @@
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span><a href="../chat/chat.php">CHAT</a></span>
-                </span>
-            </button>
-            <button>
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button>
+            </button><br><br><br><br><br>
             <button>
-                <span>
-                    <img src="<?php
+            <span class="perfil-container">                    <img src="<?php
                     include_once('../buscardado.php');
                     echo "../cadastro/" . $perfil;
-                    ?>" alt="Foto de perfil" class="perfil">
+                    ?>" alt="Foto de perfil" class="perfil2">
                     <span><a href="../users/user.php" id="usuario">
                             <?php echo $nick; ?>
                         </a></span>

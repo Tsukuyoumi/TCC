@@ -97,16 +97,26 @@ article {
     object-fit: cover;
 }
 
-.perfil {
+/* Container para a imagem de perfil */
+.perfil-container {
     position: absolute;
-    display: flex;
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    top: 170px;
-    left: 250px;
-    border: 2px black solid
+    border: 2px solid black;
+    overflow: hidden;
+    margin-top: -60px;
+    margin-left: 10px;
 }
+
+/* Imagem de perfil */
+.perfil-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantém a proporção e corta a imagem */
+    border-radius: 50%; /* Torna a imagem circular */
+}
+
 
 h3 {
     display: flex;
@@ -120,8 +130,8 @@ h3 {
 h2 {
     display: flex;
     position: absolute;
-    left: 380px;
-    top: 230px;
+    left: 390px;
+    top: 240px;
     font-size: 20px;
     color: lightgray;
 }
@@ -151,19 +161,6 @@ h2 {
     left: 640px;
     font-weight: bold;
     font-size: 20px;
-}
-
-.C {
-    display: flex;
-    position: absolute;
-    top: 223px;
-    left: 1060px;
-    background-color: #ffbb00;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .DS a{
@@ -199,16 +196,31 @@ h2 {
     padding-bottom: 205px;
 }
 
+
+
 /*Botão do usuario no fim*/
 .links button:nth-last-child(1) {
     margin-top: 70px;
 }
 
-.perfil2 {
-    width: 40px;
-    border-radius: 25px;
-    margin-top: -6px;
+.perfil2-container {
+    width: 10px;
+    height: 40px;
+    overflow: hidden;
 }
+
+.perfil2 {
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    margin-top: -8px;
+}
+
+#usuario {
+    font-size: 20px;
+}
+
 
 /*imagem*/
 .result-item.post {
@@ -233,6 +245,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    cursor: pointer;
 }
 
 .imagens p {
@@ -244,6 +257,24 @@ h2 {
     top: 34%;
     margin-left: 78%;
 }
+
+.botoes{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-top: 150px;
+    margin-left: 830px;
+}
+
+.opcao {
+    background-color: #ffbb00;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 
 /*Conversão*/
 @media (max-width: 1020px) {

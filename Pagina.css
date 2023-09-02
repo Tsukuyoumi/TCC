@@ -2,6 +2,10 @@ body {
     background-color: rgb(15, 15, 15);
     color: white;
 }
+.posts-h1{
+    color: white;
+    margin-left: 220px;
+}
 
 /*Sidebar*/
 aside {
@@ -74,27 +78,39 @@ aside {
     margin-top: 70px;
 }
 
-.perfil{
-width: 40px; 
-border-radius: 25px;
-margin-top: -6px;
+.perfil-container {
+    width: 150px;
+    height: 40px;
+    overflow: hidden;
 }
-#usuario{
+
+.perfil2 {
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    margin-top: -8px;
+}
+
+#usuario {
     font-size: 20px;
 }
+
+
 
 /*Conteudo*/
 article {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Mantenha "row" para exibir duas colunas */
     margin-left: 220px;
     width: 84%;
     height: 100%;
     top: 0;
     transition: all 0.50s;
 }
+
 .result-item.post {
-    width: 257px;
+    width: 48%; /* Use uma porcentagem que funcione bem para duas colunas */
     height: 500px;
     padding: 5px;
     margin-top: 10px;

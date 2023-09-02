@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
             if (mysqli_num_rows($result) > 0) {
                 echo "<script> alert('O nome já existe. Por favor, tente novamente com outro nome.'); </script>";
             } else {
-                $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha) VALUES ('$nome','$email','$nick','$senha')");
+                $result = mysqli_query($conexao, "INSERT INTO users(nome,email,nick,senha,perfil,backFoto) VALUES ('$nome','$email','$nick','$senha', '$perfil', '$backFoto')");
                 
                 if ($result) {
                     $last_inserted_id = mysqli_insert_id($conexao); // Obtém o ID do último usuário inserido
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
                     $_SESSION['id_usuario'] = $last_inserted_id;
 
                     // Redireciona para a página principal ou outra página desejada
-                    header('Location: update/update.php');
+                    header('Location: update.php');
                 } else {
                     echo "<script> alert('Erro ao cadastrar usuário.'); </script>";
                 }
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
 		<label for="email">E-mail:</label>
 		<input type="email" name="email" placeholder="E-mail">
 		<br>
-        <label for="telefone">Nick name:</label>
+        <label for="telefone">Como você quer ser chamado:</label>
 		<input type="text" name="nick" placeholder="Nick">
 		<br>
         <label for="senha">Senha:</label>

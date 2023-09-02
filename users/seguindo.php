@@ -59,20 +59,18 @@ if (isset($_GET['id'])) {
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span><a href="../chat/chat.php">CHAT</a></span>
-                </span>
-            </button>
-            <button>
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button>
+            </button><br><br><br><br><br>
             <button>
                 <span>
-                    <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    <span><a href="user.php" id="usuario"><?php echo $nome; ?></a></span>
+                    <div perfil2_container>
+                        <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+                    </div>
+                    <span><a href="user.php" id="usuario">
+                            <?php echo $nome; ?>
+                        </a></span>
                 </span>
             </button>
         </nav>
@@ -91,10 +89,17 @@ if (isset($_GET['id'])) {
                 $row_info_seguindo = $result_info_seguindo->fetch_assoc();
 
                 // Exibir informações da pessoa seguida
+                echo '<a href="person.php?id=' . $seguindo_id . '" class="seguidor-link">';
                 echo '<div class="seguidor">';
-                echo '<img src="../cadastro/' . $row_info_seguindo['perfil'] . '" alt="Foto de perfil">';
-                echo "<div class='result-item name'><a href='person.php?id=$seguindo_id'>$row_info_seguindo[nick]</a></div>";
+                echo '<div class="perfil-container">';
+                echo '<img src="../cadastro/' . $row_info_seguindo['perfil'] . '" alt="Foto de perfil" class="perfil-imagem">';
                 echo '</div>';
+                echo "<div class='perfil-info'>";
+                echo "<div class='result-item name'>$row_info_seguindo[nick]</div>";
+                echo '</div>';
+                echo '</div>';
+                echo '</a>';
+                
             }
 
             $conexao->close();

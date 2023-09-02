@@ -77,6 +77,7 @@ if (isset($_GET["id"])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,20 +121,18 @@ if (isset($_GET["id"])) {
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span><a href="../chat/chat.php">CHAT</a></span>
-                </span>
-            </button>
-            <button>
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button>
+            </button><br><br><br><br><br>
             <button>
                 <span>
-                    <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    <span><a href="user.php" id="usuario"><?php echo $nome; ?></a></span>
+                    <div perfil2_container>
+                        <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+                    </div>
+                    <span><a href="user.php" id="usuario">
+                            <?php echo $nome; ?>
+                        </a></span>
                 </span>
             </button>
         </nav>
@@ -144,10 +143,11 @@ if (isset($_GET["id"])) {
                 <div class="area-imagem">
                     <img src="<?php echo $backFoto; ?>" alt="background">
                 </div>
-                <img src="<?php echo $perf; ?>" alt="Foto de perfil" class="perfil">
-
+                <div class="perfil-container">
+                <img src="<?php echo $perf; ?>" alt="Foto de perfil" class="perfil-img">
+                </div>
                 <h3>
-                    <?php echo $non; ?>
+                    <?php echo $non?>
                 </h3> <!-- Fechamento da tag h3 -->
                 <h2>
                     <?php echo "🌘" . $tipoArt; ?>
@@ -168,7 +168,6 @@ if (isset($_GET["id"])) {
                     }
                     ?>
                 </div>
-                <button class="C">conversar</button>
 
                 <p class="bio" id="bio">
                     <?php echo $bio; ?>

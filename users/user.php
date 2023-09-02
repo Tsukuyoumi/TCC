@@ -40,8 +40,8 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <span><a href="../explorar/explorar.php">EXPLORAR</a></span>
                 </span>
             </button>
-            <?php include('../Codigos/modalN.php');?>
-            <button  onclick="openModal()">
+            <?php include('../Codigos/modalN.php'); ?>
+            <button onclick="openModal()">
                 <span>
                     <i class="material-symbols-outlined trans"> favorite </i>
                     <span>NOTIFICAÇÕES</span>
@@ -49,19 +49,15 @@ $perfil = "../cadastro/" . $row["perfil"];
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span><a href="../chat/chat.php">CHAT</a></span>
-                </span>
-            </button>
-            <button>
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button>
+            </button><br><br><br><br><br>
             <button>
                 <span>
-                    <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+                    <div perfil2_container>
+                        <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+                    </div>
                     <span><a href="user.php" id="usuario">
                             <?php echo $nome; ?>
                         </a></span>
@@ -75,7 +71,13 @@ $perfil = "../cadastro/" . $row["perfil"];
                 <div class="area-imagem">
                     <img src="<?php echo $backFoto; ?>" alt="background">
                 </div>
-                <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil">
+                <div class="perfil-container">
+                    <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil-img">
+                </div>
+                <div class="botoes">
+                    <button class="opcao"><a href="../cadastro/update.php">Editar perfil</a></button>
+                    <button class="opcao"><a href="../Codigos/logout.php">Desconectar </a></button>
+                </div>
 
                 <h3>
                     <?php echo $nome; ?>
@@ -93,41 +95,38 @@ $perfil = "../cadastro/" . $row["perfil"];
                 </p>
             </div>
         </div>
-        <div class="atualizar">
-            <a href="../cadastro/update/update.php"><img src="../icones/pincel.png" alt="" width="50%"></a>
-        </div>
 
     </article>
     <div class="imagens">
-    <?php
-    if ($posts_result !== false && $posts_result->num_rows > 0) {
-        while ($row = $posts_result->fetch_assoc()) {
-            $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
-            $post_image = $row['imagem'];
-            $post_date = $row['data'];
+        <?php
+        if ($posts_result !== false && $posts_result->num_rows > 0) {
+            while ($row = $posts_result->fetch_assoc()) {
+                $post_id = $row['id']; // Supondo que haja um campo ID em sua tabela de posts
+                $post_image = $row['imagem'];
+                $post_date = $row['data'];
 
-            echo "<div class='post-item result-item post'>";
-            echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
-            echo "</div>";
+                echo "<div class='post-item result-item post'>";
+                echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>"; // Adicione o atributo data-id
+                echo "</div>";
+            }
+        } else {
+            echo "<p>Nenhum post encontrado.</p>";
         }
-    } else {
-        echo "<p>Nenhum post encontrado.</p>";
-    }
-    ?>
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const postImages = document.querySelectorAll('.post-item img');
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const postImages = document.querySelectorAll('.post-item img');
-
-        postImages.forEach(img => {
-            img.addEventListener('click', function() {
-                const postId = this.getAttribute('data-id');
-                window.location.href = `../posts/posts.php?id=${postId}`; // Passa o ID como parâmetro na URL
+                postImages.forEach(img => {
+                    img.addEventListener('click', function () {
+                        const postId = this.getAttribute('data-id');
+                        window.location.href = `../posts/posts.php?id=${postId}`; // Passa o ID como parâmetro na URL
+                    });
+                });
             });
-        });
-    });
-</script>
-            <?php include('../Codigos/modalN.php'); ?>
+
+        </script>
+        <?php include('../Codigos/modalN.php'); ?>
 
 </body>
 

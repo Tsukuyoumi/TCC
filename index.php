@@ -51,16 +51,10 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
             </button>
             <button onclick="clicar1()">
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span>CHAT</span>
-                </span>
-            </button>
-            <button onclick="clicar1()">
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span>ADICIONAR</span>
                 </span>
-            </button>
+            </button><br><br><br><br>
             <button onclick="clicar1()">
                 <span>
                     <i class="material-symbols-outlined trans">Person</i>

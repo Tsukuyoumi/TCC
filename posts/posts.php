@@ -33,12 +33,29 @@ if (isset($_GET['id'])) {
     } else {
         echo "<p>Post não encontrado.</p>";
     }
-
 } else {
     echo "<p>ID do post não fornecido.</p>";
 }
 
+// Processamento do envio de mensagens
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $conteudo = $_POST['txtConteudo'];
+
+    $usuario = $nome; // Nome do usuário atual (você precisará ajustar isso)
+
+    // Inserir a mensagem na tabela Mensagens
+    $sqlInserirMensagem = "INSERT INTO Mensagens (MEN_POST_ID, MEN_USUARIO, MEN_CONTEUDO) VALUES ('$postId', '$usuario', '$conteudo')";
+
+    if ($conexao->query($sqlInserirMensagem) === TRUE) {
+        // Redirecionar de volta para a página de exibição do chat
+        header("Location: posts.php?id=$postId");
+        exit();
+    } else {
+        echo "Erro ao enviar a mensagem: " . $conexao->error;
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,16 +100,10 @@ if (isset($_GET['id'])) {
             </button>
             <button>
                 <span>
-                    <i class="material-symbols-outlined trans">group_add</i>
-                    <span><a href="../chat/chat.php">CHAT</a></span>
-                </span>
-            </button>
-            <button>
-                <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button>
+            </button><br><br><br><br><br>
             <button>
                 <span>
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
@@ -103,6 +114,16 @@ if (isset($_GET['id'])) {
             </button>
         </nav>
     </aside>
+    <div class="apagar">
+        <?php
+        $usuario_id = $_SESSION['id_usuario'];
+
+        if ($user_id == $usuario_id) {
+            echo "<button onclick=\"apagarPost($postId)\">Apagar</button>";
+        }
+        ?>
+    </div>
+
     <article class="principal">
         <div class="post">
             <img src="../<?php echo $post_image; ?>" alt="Imagem do Post">
@@ -115,24 +136,63 @@ if (isset($_GET['id'])) {
                         <?php echo $tipoArt; ?>
                     </p>
                     <p>
-                        <?php echo $desc; ?>
+                    <h4>Descrição</h4>
+                    <?php echo $desc; ?>
                     </p>
                 </div>
-                <div class="perfil" id="perfilDiv">
-                    <img src="../cadastro/<?php echo $perf; ?>" alt="">
+                <div class="perfil3" id="perfilDiv">
+                    <div class="perfil3-container">
+                        <img src="../cadastro/<?php echo $perf; ?>" alt="">
+                    </div>
                     <p>
                         <?php echo $non; ?>
                     </p>
                 </div>
-
-
             </div>
+    </article>
+    <div class="painel">
+    <h2 style="border-bottom: 1px solid white;">Chat</h2>
+        <div class="chat">
+            <?php
+            // Exibir mensagens associadas a esse post
+            $mensagens_sql = "SELECT * FROM Mensagens WHERE MEN_POST_ID = '$postId'";
+            $mensagens_result = $conexao->query($mensagens_sql);
+
+            if ($mensagens_result !== false && $mensagens_result->num_rows > 0) {
+                while ($mensagem_row = $mensagens_result->fetch_assoc()) {
+                    $mensagemUsuario = $mensagem_row['MEN_USUARIO'];
+                    $mensagemConteudo = $mensagem_row['MEN_CONTEUDO'];
+                    $mensagemData = $mensagem_row['MEN_DATA'];
+
+                    echo "<div class='mensagem'>";
+                    echo "<p><strong>$mensagemUsuario</strong>: $mensagemConteudo</p>";
+                    echo "<span class='data'>$mensagemData</span>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p>Nenhuma mensagem encontrada.</p>";
+            }
+            ?>
         </div>
+        <form action="#" class="formulario" method="POST">
+            <textarea name="txtConteudo" id="" cols="30" rows="6" placeholder="Sua mensagem*"></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    </div>
+    </div>
     </article>
     <script>
         document.getElementById("perfilDiv").addEventListener("click", function () {
-            window.location.href = "../users/person.php?id=<?php echo $user_id; ?>";
+            window.location.href = "../users/person.php?id=<?php echo $user_id ?>";
         });
+        function apagarPost(postId) {
+            var confirma = confirm("Tem certeza de que deseja apagar este post? Esta ação não pode ser desfeita.");
+            if (confirma) {
+                window.location.href = "../Codigos/excluir_post.php?id=" + postId;
+            }
+        };
     </script>
     <?php include('../Codigos/modalN.php'); ?>
 </body>
