@@ -82,8 +82,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
             <br>            <br>
 
             <div class="Sobre">
-                <p>Ao primeiro momento em que você entra na pagina, pelo fato de não seguir niguem o ststema opta por te mostar 2 colunas de posts de pessoas que estão a cima da media de seguidores e as outras duas de pessoas a baixo damedia de seguidores </p>
-            </div>
+                <p>&nbsp;&nbsp;&nbsp;Ao primeiro momento em que você entra na pagina, pelo fato de não seguir niguem o ststema opta por te mostar 4 colunas de posts de pessoas que estão a baixo da media de seguidores, media essa que é feita somando todos os numeros de pessoas seguidas pelos usuarios do site e então divide pelo numero de usuarios do site.</p>           </div>
             <div class="post">
                 <img class="Foto" src="icones\Ap1.png" alt="logo">
                 <p class="posts"> &nbsp;&nbsp;&nbsp;As duas primeiras colunas são para posts de pessoas a qual você segue.<br>
