@@ -75,8 +75,7 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil-img">
                 </div>
                 <div class="botoes">
-                    <button class="opcao"><a href="../cadastro/update.php">Editar perfil</a></button>
-                    <button class="opcao"><a href="../Codigos/logout.php">Desconectar </a></button>
+                    <button class="opcao"><a href="../config/config.php">Opções</a></button>
                 </div>
 
                 <h3>
