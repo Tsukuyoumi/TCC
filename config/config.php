@@ -69,7 +69,7 @@ $perfil = "../cadastro/" . $row["perfil"];
     <div class="Usuario">
         <div class="linha2">
         <div class="U">
-            <h1>Configurações do usuario</h1>
+            <h1>CONFIGURAÇÕES DE USUARIO</h1>
         <form method="POST" action="../Codigos/up.php" enctype="multipart/form-data">
             <p>ATUALIZAR EMAIL: <input type="email" name="email"></p>
             <p>ATUALIZAR SENHA: <input type="password" name="senha"></p>
@@ -81,20 +81,107 @@ $perfil = "../cadastro/" . $row["perfil"];
     </div>
     <div class="linha2">
     <div class="apagar">
-        <h1>APAGAR CONTA</h1>
+        <h1 class="h2">APAGAR CONTA</h1>
         <form method="POST" action="../Codigos/apagar.php">
-            <p>ATUALIZAR EMAIL: <input type="email" name="email"></p>
-            <p>ATUALIZAR SENHA: <input type="password" name="senha"></p>
+            <p>CONFIRMAR EMAIL: <input type="email" name="email"></p>
+            <p>CONFIRMAR SENHA: <input type="password" name="senha"></p>
             <br>
             <input class="enviar" type="submit" name="apagar" value="apagar" class="linha">
         </form>
     </div>
     </div>
+    <div class="cor">
+    <div class="Imagens">
+        <form action="POST" method="../Codigos/perfilUp.php">
+    <label for="perfil" class="perfil__container">
+        <h1>IMAGEM DE PERFIL</h3>
+        <input type="file" name="perfil" id="perfil">
+        <div class="perfil_preview"></div>
+    </label>
+    <br>
+    <br>
+        <input class="enviar inp1" type="submit" name="submit" value="Enviar">
+    </form>
+    </div>
+    <div class="Imagens2">
+        <form action="POST" method="../Codigos/backUp.php">
+        <label for="back">
+        <h1>IMAGEM DE FUNDO</h1>
+        <input type="file" name="back" id="back">
+        <div class="back_preview"></div>
+    </label>
+    <br>
+    <br>
+        <input class="enviar inp2" type="submit" name="submit" value="Enviar">
+        </form>
+    </div>
 </div>
+</div>
+<br>
+<div class="Usuario">
+        <div class="linha2">
+        <div class="U">
+        <form method="POST" action="../Codigos/NickBio.php" enctype="multipart/form-data">
+    <p class="palt">ALTERAR APELIDO: <input type="text" name="apelido"></p>
+    <label for="bio"><h1> Fale sobre você: </h1></label>
+    <textarea id="myTextarea" rows="6" cols="57" name="bio" placeholder="Fale um pouco sobre você! no máximo 5 linhas"></textarea>
+    <br>
+    <input class="enviar" type="submit" name="update_nick" value="Atualizar apelido">
+    <input class="enviar" type="submit" name="update_bio" value="Atualizar bio">
+</form>
+   
+    </div>
+    </div>
+<br>
+
 <br>
     <button class="opcao"><a href="../Codigos/logout.php">Desconectar </a></button>
 
     </article>
 
-    </body>
+
+    <script>
+document.getElementById('perfil').addEventListener('change', function (event) {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const perfilPreview = document.querySelector('.perfil_preview');
+            perfilPreview.innerHTML = '';
+
+            const imagem = new Image();
+            imagem.src = e.target.result;
+            imagem.alt = 'Imagem selecionada';
+            imagem.style.height = '100%';
+            perfilPreview.appendChild(imagem);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
+document.getElementById('back').addEventListener('change', function (event) {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const backPreview = document.querySelector('.back_preview');
+            backPreview.innerHTML = '';
+
+            const imagem = new Image();
+            imagem.src = e.target.result;
+            imagem.alt = 'Imagem selecionada';
+            imagem.style.height = '100%';
+            backPreview.appendChild(imagem);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
+</script>
+</body>
+
 </html>

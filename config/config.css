@@ -113,6 +113,17 @@ article {
 padding-bottom: 10px;
 margin-left: 375px;
 }
+#myTextarea{
+    border-radius: 20px;
+    margin-left: -20px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+.palt{
+    color: rgb(255, 174, 0);
+    font-size: 20px;
+    margin-left: -20px;
+}
 .apagar{
     margin-left: 375px;
 }
@@ -129,30 +140,146 @@ input{
     border: 0;
     cursor: pointer;
 }
+
+.inp1{
+    margin-left: 125px;
+}
+.inp2{
+    margin-left: 55px;
+}
+
 p{
     font-size: 15px;
     font-weight: bold;
 }
 h1{
-    margin-bottom: 55px;
+    margin-bottom: 45px;
     color: rgb(255, 174, 0);;
-    margin-left: 30px;
+    margin-left: -20px;
+}
+.h2{
+    margin-left: 60px;
 }
 
 .opcao{
     width: 150px;
     height: 35px;
     margin-bottom: 10px;
+    margin-left: 380px;
     background-color: rgb(255, 174, 0);
     font-weight: bold;
     border: 0;
     border-radius: 10px;
 }
 
+/*imagens*/
+label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+.perfil__image:hover{
+    background-color: rgb(16, 16, 16);
+    color: #666666;
+    border: 1px dashed #666666;
+}
+.perfil__image:active{
+    background-color: rgb(14, 14, 14);
+    color: #969696;
+    border: 1px dashed #969696;
+}
+
+
+.perfil__image img {
+    width: auto;
+    height: 100%; /* Altere para 100% para garantir que seja cortada circularmente */
+    max-width: 600%;
+    max-height: 100%;
+}
+
+.back__image:hover{
+    background-color: rgb(16, 16, 16);
+    color: #666666;
+    border: 1px dashed #666666;
+}
+.back__image:active{
+    background-color: rgb(14, 14, 14);
+    color: #969696;
+    border: 1px dashed #969696;
+}
+
+.back__image img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+.back_preview {
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgb(17, 17, 17);
+border: 1px dashed #969696;
+border-radius: 10px;
+height: 240px; /* Ajuste conforme necessário */
+width: 440px; /* Ajuste conforme necessário */
+margin-top: 10px; /* Adicione um espaçamento entre os contêineres */
+overflow: hidden;
+cursor: pointer;
+}    
+.perfil_preview{
+margin-left: 25%;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgb(17, 17, 17);
+border: 1px dashed #969696;
+border-radius: 10px;
+height: 190px; /* Ajuste conforme necessário */
+width: 200px; /* Ajuste conforme necessário */
+margin-top: 10px; /* Adicione um espaçamento entre os contêineres */
+overflow: hidden;
+cursor: pointer;
+border-radius: 100%;
+}
+.circular-mask {
+mask-image: radial-gradient(circle, white 100%, transparent 100%);
+mask-mode: alpha;
+mask-size: cover;
+}
+.fit-to-circle {
+object-fit: cover;
+width: 100%;
+height: 100%;
+border-radius: 50%;
+}
+
+.Imagens{
+    margin-left: 250px;
+}
+.Imagens2{
+    margin-left: 320px;
+}
+.Imagens h1{
+    margin-left: 170px;
+    color: rgb(255, 174, 0);
+    font-weight: bold;
+}
+.Imagens2 h1{
+    margin-left: 110px;
+    color: rgb(255, 174, 0);
+    font-weight: bold;
+}
+.cor{
+    border-bottom: 1px solid gray;
+    width: 100%;
+height: 100%;
+}
+
 /*Conversão*/
 @media (max-width: 1020px) {
 
-    /* Alterei "width" para "max-width" */
     aside {
         width: 70px;
     }

@@ -48,6 +48,8 @@
         placeholder="Fale um pouco sobre você! <br> no maximo 5 linhas"></textarea>
     <p></p>
     <input class="enviar" type="submit" name="submit" value="Enviar">
+    <button class="enviar"><a href="../paginaPrincipal.php">Pular etapa</a></button>
+
 </form>
 
 <script>
@@ -63,7 +65,7 @@ document.getElementById('perfil').addEventListener('change', function (event) {
             const imagem = new Image();
             imagem.src = e.target.result;
             imagem.alt = 'Imagem selecionada';
-            imagem.style.height = '100%'; // Definir a altura como 100%
+            imagem.style.height = '100%';
             perfilPreview.appendChild(imagem);
         }
 
@@ -83,7 +85,7 @@ document.getElementById('back').addEventListener('change', function (event) {
             const imagem = new Image();
             imagem.src = e.target.result;
             imagem.alt = 'Imagem selecionada';
-            imagem.style.height = '100%'; // Definir a altura como 100%
+            imagem.style.height = '100%';
             backPreview.appendChild(imagem);
         }
 

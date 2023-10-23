@@ -97,6 +97,17 @@ article {
     transition: all 0.50s;
 }
 
+#tipoArt{
+    position: absolute;
+    margin-top: 52px;
+    margin-left: 260px;
+    color: white;
+    background-color: #ffbb00;
+    border: none;
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+}
 /*ajuste sidebar*/
 
 @media (width < 1020px) {
@@ -254,10 +265,26 @@ article {
 
 /*Nomes:*/
 .name{
+    display: flex;
+    flex-direction: column;
     margin-left: 10px;
     padding: 5px;
 }
 .name a{
     color: inherit;
     text-decoration: none;
+}
+.direcao{
+    display: flex;
+    flex-direction: row;
+}
+.perfil3 {
+    width: 60px;
+    height: 60px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    margin-top: -8px;
+}
+.nomed{
+    margin-left: 20px;
 }

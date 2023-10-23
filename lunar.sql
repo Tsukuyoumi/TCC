@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02/09/2023 às 00:34
+-- Tempo de geração: 23/10/2023 às 21:40
 -- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Versão do PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,11 +37,15 @@ CREATE TABLE `chats` (
 --
 
 INSERT INTO `chats` (`chat_id`, `post_id`) VALUES
-(1, 9),
-(2, 10),
-(3, 11),
-(4, 12),
-(5, 13);
+(1, 14),
+(2, 15),
+(3, 16),
+(4, 17),
+(5, 18),
+(6, 19),
+(7, 20),
+(8, 21),
+(9, 22);
 
 -- --------------------------------------------------------
 
@@ -62,16 +66,15 @@ CREATE TABLE `mensagens` (
 --
 
 INSERT INTO `mensagens` (`MEN_CODIGO`, `MEN_POST_ID`, `MEN_USUARIO`, `MEN_CONTEUDO`, `MEN_DATA`) VALUES
-(1, 9, 'usuário', '', NULL),
-(2, 9, '', 'oi', NULL),
-(3, 9, '', 'tchau', NULL),
-(4, 2, '', 'ooi\r\n', NULL),
-(5, 9, '', 'JOOOOOOOOOOje\r\n', NULL),
-(6, 10, 'usuário', '2 fez uma nova postagem', NULL),
-(7, 11, 'usuário', '1 fez uma nova postagem', NULL),
-(8, 12, 'usuário', 'Usuario1 fez uma nova postagem', NULL),
-(9, 10, '', 'horrivel!!!\r\n', NULL),
-(10, 13, 'usuário', 'Juh fez uma nova postagem', NULL);
+(1, 14, 'usuário', 'GU fez uma nova postagem', NULL),
+(2, 15, 'usuário', 'testinho fez uma nova postagem', NULL),
+(3, 16, 'usuário', 'testinho fez uma nova postagem', NULL),
+(4, 17, 'usuário', 'testinho fez uma nova postagem', NULL),
+(5, 18, 'usuário', 'testinho fez uma nova postagem', NULL),
+(6, 19, 'usuário', 'tete fez uma nova postagem', NULL),
+(7, 20, 'usuário', 'bata fez uma nova postagem', NULL),
+(8, 21, 'usuário', 'bata fez uma nova postagem', NULL),
+(9, 22, 'usuário', 'tutu fez uma nova postagem', NULL);
 
 -- --------------------------------------------------------
 
@@ -92,12 +95,22 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `user_id`, `mensagem`, `data_criacao`, `lida`) VALUES
-(1, 1, 'Você foi seguido por Usuario2', '0000-00-00 00:00:00', 0),
-(2, 2, '1 fez uma nova postagem', '2023-09-01 02:48:22', 0),
-(3, 2, 'Usuario1 fez uma nova postagem', '2023-09-01 03:02:26', 0),
-(4, 2, 'Você foi seguido por Usuario1', '0000-00-00 00:00:00', 0),
-(5, 2, 'Você foi deixado de seguir por Usuario1', '0000-00-00 00:00:00', 0),
-(6, 2, 'Você foi seguido por Usuario1', '0000-00-00 00:00:00', 0);
+(2, 6, 'Você foi seguido por testinho', '2023-10-23 17:50:13', 0),
+(3, 6, 'Você foi seguido por tete', '2023-10-23 17:56:45', 0),
+(4, 7, 'Você foi seguido por tete', '2023-10-23 17:57:13', 0),
+(5, 7, 'Você foi deixado de seguir por tete', '2023-10-23 17:57:21', 0),
+(6, 7, 'Você foi seguido por tete', '2023-10-23 17:57:23', 0),
+(7, 7, 'bata fez uma nova postagem', '2023-10-23 18:00:11', 0),
+(8, 8, 'bata fez uma nova postagem', '2023-10-23 18:00:11', 0),
+(9, 7, 'bata fez uma nova postagem', '2023-10-23 18:00:18', 0),
+(10, 8, 'bata fez uma nova postagem', '2023-10-23 18:00:18', 0),
+(11, 8, 'Você foi seguido por gu', '2023-10-23 18:11:57', 0),
+(12, 8, 'Você foi deixado de seguir por gu', '2023-10-23 18:12:00', 0),
+(13, 6, 'Você foi seguido por gu', '2023-10-23 18:12:06', 0),
+(14, 6, 'Você foi deixado de seguir por gu', '2023-10-23 18:12:23', 0),
+(15, 6, 'Você foi seguido por tutu', '2023-10-23 18:14:12', 0),
+(16, 9, 'Você foi seguido por gu', '2023-10-23 18:16:08', 0),
+(17, 7, 'Você foi seguido por gu', '2023-10-23 18:16:18', 0);
 
 -- --------------------------------------------------------
 
@@ -121,18 +134,15 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `imagem`, `nome`, `tipoArt`, `descricao`, `id_user`, `chat_id`, `data`) VALUES
-(1, 'uploads/1297525.jpg', 'teste 1', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#', 1, 0, '2023-08-31 22:16:24'),
-(2, 'uploads/1326140.jpeg', 'teste1', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#', 2, 0, '2023-08-31 22:33:55'),
-(3, 'uploads/1102798.jpg', 'teste2', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#', 2, 0, '2023-08-31 22:55:43'),
-(4, 'uploads/1297525.jpg', 'teste2', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#', 2, 0, '2023-08-31 23:03:27'),
-(5, 'uploads/976746.jpg', 'Gwen', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#', 2, 0, '2023-08-31 23:12:29'),
-(7, 'uploads/976746.jpg', 'gwen', 'Desenho', '#<br />\r\n#<br />\r\n#<br />\r\n#<br />\r\n', 2, 0, '2023-09-01 00:50:15'),
-(8, 'uploads/976746.jpg', 'gwen', 'Desenho', '#<br />\r\n#<br />\r\n#<br />\r\n#<br />\r\n', 2, 7, '2023-09-01 00:50:15'),
-(9, 'uploads/1310961.jpeg', 'punk', 'Pintura', '<br />\r\n%%<br />\r\n<br />\r\n%<br />\r\n%<br />\r\n%<br />\r\n%<br />\r\n%<br />\r\n<br />\r\n%<br />\r\n', 2, 0, '2023-09-01 01:36:03'),
-(10, 'uploads/1316077.jpeg', 'teste mensagem', 'Pintura', 'g<br />\r\ng<br />\r\ng<br />\r\ng<br />\r\n', 2, 0, '2023-09-01 02:46:07'),
-(11, 'uploads/1317555.jpeg', 'Miles', 'Pintura', '', 1, 0, '2023-09-01 02:48:22'),
-(12, 'uploads/R.jpg', 'Teste', 'Pintura', '', 1, 0, '2023-09-01 03:02:26'),
-(13, 'uploads/1078854.png', 'Juliana de Oliveira costa', 'Pintura', 'llll<br />\r\n', 4, 0, '2023-09-01 21:34:05');
+(14, 'uploads/1310342.jpg', 'Teste', 'Pintura', '#<br />\r\n#<br />\r\n#<br />\r\n#<br />\r\n<br />\r\n#', 5, 0, '2023-09-28 17:56:30'),
+(15, 'uploads/71a6c2_c849bffd831349aaab8613cc15f9481a~mv2.webp', 'teste', 'Desenho', 'teste', 7, 0, '2023-10-23 17:50:29'),
+(16, 'uploads/1273795.png', '', 'Pintura', '', 7, 0, '2023-10-23 17:51:39'),
+(17, 'uploads/1064205.png', '', 'Pintura', '', 7, 0, '2023-10-23 17:51:47'),
+(18, 'uploads/1275363.jpg', '', 'Pintura', '', 7, 0, '2023-10-23 17:51:56'),
+(19, 'uploads/1064205.png', '456', 'Pintura', '', 8, 0, '2023-10-23 17:57:50'),
+(20, 'uploads/wallpaperflare.com_wallpaper.jpg', '', 'Pintura', '', 6, 0, '2023-10-23 18:00:11'),
+(21, 'uploads/968265.png', '', 'Pintura', '', 6, 0, '2023-10-23 18:00:18'),
+(22, 'uploads/wallpaperflare.com_wallpaper.jpg', '', 'Pintura', '', 9, 0, '2023-10-23 18:10:31');
 
 -- --------------------------------------------------------
 
@@ -151,8 +161,12 @@ CREATE TABLE `seguidores` (
 --
 
 INSERT INTO `seguidores` (`id`, `seguidor_id`, `seguindo_id`) VALUES
-(1, 2, 1),
-(3, 1, 2);
+(2, 7, 6),
+(3, 8, 6),
+(5, 8, 7),
+(8, 9, 6),
+(9, 10, 9),
+(10, 10, 7);
 
 -- --------------------------------------------------------
 
@@ -178,10 +192,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nome`, `email`, `nick`, `senha`, `perfil`, `backFoto`, `bio`, `tipoArt`, `data`) VALUES
-(1, 'Jose Gustavo', 'josegustavocostaantonelli@gmail.com', 'Usuario1', '123456789', 'fotosPerfil/1310987.jpeg', 'fotosPerfil/1317553.jpeg', '$<br />\r\n%<br />\r\n¨<br />\r\n&', 'Pintura', '2023-09-01 21:21:45'),
-(2, 'Gustavo', 'Jose@gmail.com', 'Usuario2', '123456789', 'fotosPerfil/1297525.jpg', 'fotosPerfil/1310987.jpeg', '#<br />\r\n#<br />\r\n#<br />\r\n#<br />\r\n#', 'Pintura', '2023-08-31 22:33:29'),
-(3, 'gui', 'gui@gmail.com', 'gui', '123', 'fotosPerfil/976746.jpg', 'fotosPerfil/976746.jpg', 'pica', 'Design', '2023-09-01 11:55:13'),
-(4, 'Juliana de Oliveira costa', 'juumarinheiro@gmail.com', 'Juh', '123', 'fotosPerfil/976746.jpg', 'fotosPerfil/1043468.jpg', 'eu sou prof de matemática e mãe do Jose ', 'Pintura', '2023-09-01 21:29:12');
+(6, 'Gustavo', 'Jose@gmail.com', 'bata', '123456789', 'fotosPerfil/1275363.jpg', 'fotosPerfil/71a6c2_c849bffd831349aaab8613cc15f9481a~mv2.webp', 'jojo', 'Pintura', '2023-10-23 17:44:59'),
+(7, 'teste', 'test@gmail.com', 'testinho', '123', 'fotosPerfil/baixados.jpg', 'fotosPerfil/1273795.png', 'jojo', 'Pintura', '2023-10-23 17:49:55'),
+(8, 'tet', 'tet@gmail.com', 'tete', '123', 'fotosPerfil/shkajsdskf87349gb.jpg', 'fotosPerfil/kjmkhinfwvruiiw31.jpg', '', '', '2023-10-23 17:53:00'),
+(9, 'tutu', 'tutu@gmail.com', 'tutu', '123', 'fotosPerfil/shkajsdskf87349gb.jpg', 'fotosPerfil/kjmkhinfwvruiiw31.jpg', '', '', '2023-10-23 18:00:46'),
+(10, 'gu', 'gu@gmail.com', 'gu', '123', 'fotosPerfil/shkajsdskf87349gb.jpg', 'fotosPerfil/kjmkhinfwvruiiw31.jpg', '', '', '2023-10-23 18:10:56');
 
 --
 -- Índices para tabelas despejadas
@@ -236,37 +251,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens`
 --
 ALTER TABLE `mensagens`
-  MODIFY `MEN_CODIGO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MEN_CODIGO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `seguidores`
 --
 ALTER TABLE `seguidores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para tabelas despejadas
@@ -288,14 +303,14 @@ ALTER TABLE `mensagens`
 -- Restrições para tabelas `notifications`
 --
 ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `seguidores`
 --
 ALTER TABLE `seguidores`
   ADD CONSTRAINT `seguidores_ibfk_1` FOREIGN KEY (`seguidor_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `seguidores_ibfk_2` FOREIGN KEY (`seguindo_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `seguidores_ibfk_3` FOREIGN KEY (`seguindo_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

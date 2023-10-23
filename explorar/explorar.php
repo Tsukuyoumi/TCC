@@ -61,48 +61,74 @@
 
         <form class="search-box" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" class="search" name="search_name" id="search_name" required>
+            <br>
+<select name="tipoArt" id="tipoArt">
+    <option value="">Filtro</option>
+    <option value="Pintura">Pintura</option>
+    <option value="Desenho">Desenho</option>
+    <option value="Escultura">Escultura</option>
+    <option value="Fotografia">Fotografia</option>
+</select>
+
             <button type="submit" class="button"><i class="material-symbols-outlined trans">Search</i></button>
         </form>
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            include_once('../cadastro/conexao.php'); // Substitua pelo caminho correto para o arquivo de conexão
-            $search_name = $_POST['search_name']; // Nome que o usuário digitou
-        
-            // Verificar a conexão
-            if ($conexao->connect_error) {
-                die("Conexão falhou: " . $conexao->connect_error);
-            }
-
-            // Consulta SQL para buscar o ID na tabela "users"
-            $user_sql = "SELECT id, nick AS name FROM users WHERE nick LIKE '$search_name%'";
-            $user_result = $conexao->query($user_sql);
-
-            // Consulta SQL para buscar o ID na tabela "posts"
-            $post_sql = "SELECT id, imagem FROM posts WHERE nome LIKE '$search_name%'";
-            $post_result = $conexao->query($post_sql);
+       if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        include_once('../cadastro/conexao.php'); // Substitua pelo caminho correto para o arquivo de conexão
+        $search_name = $_POST['search_name']; // Nome que o usuário digitou
+        $tipoArt = $_POST['tipoArt']; // Tipo de arte a ser filtrado
+    
+        // Verificar a conexão
+        if ($conexao->connect_error) {
+            die("Conexão falhou: " . $conexao->connect_error);
         }
+    
+        // Consulta SQL para buscar o ID na tabela "users"
+        $user_sql = "SELECT id, perfil, nick AS name FROM users WHERE nick LIKE '$search_name%'";
+        $user_result = $conexao->query($user_sql);
+    
+        // Consulta SQL para buscar o ID na tabela "posts" com filtro de tipoArt
+        $post_sql = "SELECT id, imagem FROM posts WHERE nome LIKE '$search_name%'";
+    
+        // Adicione a cláusula WHERE para filtrar por tipoArt
+        if (!empty($tipoArt)) {
+            $post_sql .= " AND tipoArt = '$tipoArt'";
+        }
+    
+        $post_result = $conexao->query($post_sql);
+    }
+    
         ?>
 
         <div class="toggle-buttons">
             <button id="toggleUsers" class="toggle-button" onclick="toggleUsers()">Usuários</button>
             <button id="togglePosts" class="toggle-button" onclick="togglePosts()">Artes</button>
         </div>
-
-        <div id="userResults" class="result-list">
-            <div class="name">
-                <?php
-                    if (isset($user_result) && $user_result->num_rows > 0) {
-                        while ($row = $user_result->fetch_assoc()) {
-                            if (isset($row["id"]) && isset($row["name"])) {
-                                echo "<div class='result-item name'><a href='../users/person.php?id=$row[id]'>$row[name]</a></div>";
-                        }
-                     }
-                     } else {
-                        echo "<p class='no-result-message'>Nenhum usuário encontrado!</p>";
+<div id="userResults" class="result-list">
+    <div class="name">
+        <?php
+            if (isset($user_result) && $user_result->num_rows > 0) {
+                while ($row = $user_result->fetch_assoc()) {
+                    if (isset($row["id"]) && isset($row["name"]) && isset($row["perfil"])) {
+                        $user_id = $row["id"];
+                        $user_name = $row["name"];
+                        $perfil = $row["perfil"];
+                        
+                        echo "<div class='result-item name'>
+                            <a class='direcao' href='../users/person.php?id=$user_id'>
+                                <img src='../cadastro/$perfil' class='perfil3'>
+                                <h3  class='nomed'> $user_name<h3>
+                            </a>
+                        </div>";
                     }
-                ?>
-            </div>
-        </div>
+                }
+            } else {
+                echo "<p class='no-result-message'>Nenhum usuário encontrado!</p>";
+            }
+        ?>
+    </div>
+</div>
+
 
 
         <div id="postResults" class="result-list hidden">

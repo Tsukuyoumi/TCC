@@ -127,7 +127,7 @@ h3 {
     font-size: 30px;
 }
 
-h2 {
+.h2 {
     display: flex;
     position: absolute;
     left: 390px;

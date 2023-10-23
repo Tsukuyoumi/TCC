@@ -25,45 +25,6 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
 <body>
 
-    <aside>
-        <header id="logo">
-            <img class="logo" src="icones\icone.png" alt="logo">
-        </header>
-
-        <nav class="links">
-            <button>
-                <span>
-                    <i class="material-symbols-outlined trans"> home </i>
-                    <span><a href="index.php">HOME</a></span>
-                </span>
-            </button>
-            <button onclick="clicar1()">
-                <span>
-                    <i class="material-symbols-outlined trans"> &#xE8B6 </i>
-                    <span>EXPLORAR</span>
-                </span>
-            </button>
-            <button onclick="clicar1()">
-                <span>
-                    <i class="material-symbols-outlined trans"> favorite </i>
-                    <span>NOTIFICAÇÕES</span>
-                </span>
-            </button>
-            <button onclick="clicar1()">
-                <span>
-                    <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span>ADICIONAR</span>
-                </span>
-            </button><br><br><br><br>
-            <button onclick="clicar1()">
-                <span>
-                    <i class="material-symbols-outlined trans">Person</i>
-                    <span><a id="usuario">USUARIO</a></span>
-                </span>
-            </button>
-        </nav>
-    </aside>
-
     <article>
         <div class="conteudo">
         <img class="lua" src="icones\iconinho.png" alt="logo">

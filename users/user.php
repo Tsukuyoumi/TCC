@@ -81,7 +81,7 @@ $perfil = "../cadastro/" . $row["perfil"];
                 <h3>
                     <?php echo $nome; ?>
                 </h3> <!-- Fechamento da tag h3 -->
-                <h2>
+                <h2 class="h2">
                     <?php echo "🌘" . $tipoArt; ?>
                 </h2>
 
