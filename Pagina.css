@@ -123,7 +123,45 @@ article {
     border-radius: 10px;
 }
 
+.titulosP{
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+.perfildono{
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
 
+}
+.nomedono{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.centro{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+    margin-top: -63px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px 2px; 
+    height: 45px;
+    border-radius: 20px;
+}
 /*ajuste sidebar*/
 
 @media (width < 1020px) {
