@@ -48,7 +48,11 @@ include_once("cadastro/conexao.php");
                     <span><a href="up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
-            <br><br><br><br><br>
+            <button><span class="material-symbols-outlined">
+                    build_circle
+                </span><a href="config/config.php">OPÇÕES</a></span>
+                </span>
+            </button>
             <button>
                 <span class="perfil-container">
                     <img src="<?php echo "cadastro/" . $perfil; ?>" alt="Foto de perfil" class="perfil2">
@@ -61,6 +65,9 @@ include_once("cadastro/conexao.php");
         </nav>
     </aside>
     <h1 class="posts-h1">Postagens</h1>
+
+    
+
     <article>
         <?php
         $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
@@ -73,27 +80,27 @@ include_once("cadastro/conexao.php");
 
         if (!empty($seguindo_ids)) {
             $in_clause = implode(",", $seguindo_ids);
-        
+
             $query_posts = "SELECT id, imagem, id_user, nome FROM posts WHERE id_user IN ($in_clause) ORDER BY data DESC";
             $result_posts = $conexao->query($query_posts);
-        
+
             $posts_per_column = ceil($result_posts->num_rows / 2); // Calcula quantos posts por coluna
             $current_column = 1;
             $post_count = 0;
-        
+
             echo '<div class="imagens">';
-        
+
             while ($row_posts = $result_posts->fetch_assoc()) {
                 // Adicione esta consulta para buscar o nome e o perfil do usuário
                 $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                $result_user = $conexao->query($query_user);                
+                $result_user = $conexao->query($query_user);
                 $row_user = $result_user->fetch_assoc();
-            
+
                 if ($post_count == $posts_per_column) {
                     echo '</div><div class="imagens">';
                     $post_count = 0;
                 }
-            
+
                 echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
                 echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
                 echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
@@ -101,19 +108,19 @@ include_once("cadastro/conexao.php");
                 echo '</div>';
 
                 echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/". $row_user['perfil'] ."'>";
+                echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
                 echo "<p class='nomedono'> {$row_user['nick']}</p>";
                 echo '</div>';
 
                 echo '</a>';
-            
+
                 $post_count++;
             }
-            
-        
+
+
             echo '</div>';
         }
-        
+
 
         // Obtendo os IDs das pessoas que você está seguindo
         $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
@@ -148,7 +155,7 @@ include_once("cadastro/conexao.php");
             FROM posts
             WHERE id_user IN ($in_clause)
             ORDER BY data DESC
-        ";
+            ";
 
             $result_posts = $conexao->query($query_posts);
 
@@ -158,8 +165,8 @@ include_once("cadastro/conexao.php");
             while ($row_posts = $result_posts->fetch_assoc()) {
 
                 $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                $result_user = $conexao->query($query_user);                
-                $row_user = $result_user->fetch_assoc();                
+                $result_user = $conexao->query($query_user);
+                $row_user = $result_user->fetch_assoc();
 
                 echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
                 echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
@@ -167,7 +174,7 @@ include_once("cadastro/conexao.php");
                 echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
                 echo '</div>';
                 echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/". $row_user['perfil'] ."'>";
+                echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
                 echo "<p class='nomedono'> {$row_user['nick']}</p>";
                 echo '</div>';
                 echo '</a>';
@@ -233,7 +240,7 @@ include_once("cadastro/conexao.php");
                     while ($row_posts = $result_posts->fetch_assoc()) {
 
                         $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                        $result_user = $conexao->query($query_user);                
+                        $result_user = $conexao->query($query_user);
                         $row_user = $result_user->fetch_assoc();
 
                         echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
@@ -242,9 +249,9 @@ include_once("cadastro/conexao.php");
                         echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
                         echo '</div>';
                         echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/". $row_user['perfil'] ."'>";
-                echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                echo '</div>';
+                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
+                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
+                        echo '</div>';
                         echo '</a>';
 
                         if ($column == 4) { // Mudança para quatro colunas
@@ -265,9 +272,9 @@ include_once("cadastro/conexao.php");
 
                 // Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está abaixo da média
                 $query_usuarios_nao_seguidos = "
-    SELECT u.id
-    FROM users u
-    WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) < " . $media_seguidores;
+                SELECT u.id
+                FROM users u
+                WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) < " . $media_seguidores;
 
 
                 $result_usuarios_nao_seguidos = $conexao->query($query_usuarios_nao_seguidos);
@@ -282,11 +289,11 @@ include_once("cadastro/conexao.php");
 
                     // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
                     $query_posts = "
-        SELECT id, imagem, nome, id_user, data
-        FROM posts
-        WHERE id_user IN ($in_clause)
-        ORDER BY data DESC
-    ";
+                     SELECT id, imagem, nome, id_user, data
+                    FROM posts
+                    WHERE id_user IN ($in_clause)
+                    ORDER BY data DESC
+                    ";
 
                     $result_posts = $conexao->query($query_posts);
 
@@ -296,7 +303,7 @@ include_once("cadastro/conexao.php");
                     while ($row_posts = $result_posts->fetch_assoc()) {
 
                         $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                        $result_user = $conexao->query($query_user);                
+                        $result_user = $conexao->query($query_user);
                         $row_user = $result_user->fetch_assoc();
 
                         echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
@@ -305,9 +312,9 @@ include_once("cadastro/conexao.php");
                         echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
                         echo '</div>';
                         echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/". $row_user['perfil'] ."'>";
-                echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                echo '</div>';
+                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
+                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
+                        echo '</div>';
                         echo '</a>';
 
                         if ($column == 2) {
@@ -320,66 +327,66 @@ include_once("cadastro/conexao.php");
                     echo '</div>';
                 }
                 $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
-        $result_media_seguidores = $conexao->query($query_media_seguidores);
-        $row_media_seguidores = $result_media_seguidores->fetch_assoc();
-        $media_seguidores = $row_media_seguidores['media_seguidores'];
+                $result_media_seguidores = $conexao->query($query_media_seguidores);
+                $row_media_seguidores = $result_media_seguidores->fetch_assoc();
+                $media_seguidores = $row_media_seguidores['media_seguidores'];
 
-        // Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está acima da média
-        $query_usuarios_acima_media = "
-    SELECT u.id
-    FROM users u
-    WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) > $media_seguidores
-";
+                // Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está acima da média
+                $query_usuarios_acima_media = "
+                SELECT u.id
+                FROM users u
+                WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) > $media_seguidores
+                ";
 
-        $result_usuarios_acima_media = $conexao->query($query_usuarios_acima_media);
+                $result_usuarios_acima_media = $conexao->query($query_usuarios_acima_media);
 
-        $nao_seguindo_ids = array();
-        while ($row_usuarios_acima_media = $result_usuarios_acima_media->fetch_assoc()) {
-            $nao_seguindo_ids[] = $row_usuarios_acima_media['id'];
-        }
-
-        if (!empty($nao_seguindo_ids)) {
-            $in_clause = implode(",", $nao_seguindo_ids);
-
-            // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
-            $query_posts = "
-        SELECT id, imagem, nome, id_user, data
-        FROM posts
-        WHERE id_user IN ($in_clause)
-        ORDER BY data DESC
-    ";
-
-            $result_posts = $conexao->query($query_posts);
-
-            $column = 1;
-            echo '<div class="imagens">';
-
-            while ($row_posts = $result_posts->fetch_assoc()) {
-
-                $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                $result_user = $conexao->query($query_user);                
-                $row_user = $result_user->fetch_assoc();
-                
-                echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
-                echo '</div>';
-                echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/". $row_user['perfil'] ."'>";
-                echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                echo '</div>';
-                echo '</a>';
-
-                if ($column == 2) {
-                    echo '</div><div class="imagens">';
+                $nao_seguindo_ids = array();
+                while ($row_usuarios_acima_media = $result_usuarios_acima_media->fetch_assoc()) {
+                    $nao_seguindo_ids[] = $row_usuarios_acima_media['id'];
                 }
 
-                $column = ($column == 1) ? 1 : 1; // Corrigindo a alternância das colunas
-            }
+                if (!empty($nao_seguindo_ids)) {
+                    $in_clause = implode(",", $nao_seguindo_ids);
 
-            echo '</div>';
-        }
+                    // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
+                    $query_posts = "
+                    SELECT id, imagem, nome, id_user, data
+                    FROM posts
+                WHERE id_user IN ($in_clause)
+                ORDER BY data DESC
+                ";
+
+                    $result_posts = $conexao->query($query_posts);
+
+                    $column = 1;
+                    echo '<div class="imagens">';
+
+                    while ($row_posts = $result_posts->fetch_assoc()) {
+
+                        $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
+                        $result_user = $conexao->query($query_user);
+                        $row_user = $result_user->fetch_assoc();
+
+                        echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
+                        echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+                        echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+                        echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
+                        echo '</div>';
+                        echo '<div class="centro">';
+                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
+                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
+                        echo '</div>';
+                        echo '</a>';
+
+                        if ($column == 2) {
+                            echo '</div><div class="imagens">';
+                        }
+
+                        $column = ($column == 1) ? 1 : 1; // Corrigindo a alternância das colunas
+                    }
+
+                    echo '</div>';
+                }
 
             }
         }
@@ -388,7 +395,7 @@ include_once("cadastro/conexao.php");
 
 
         <script>
-        // ... (seu código JavaScript) ...
+            // ... (seu código JavaScript) ...
         </script>
 
 </body>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("buscardado.php");
 
 if (isset($_GET['id'])) {
@@ -55,7 +55,12 @@ if (isset($_GET['id'])) {
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button><br><br><br><br><br>
+            </button>
+            <button><span class="material-symbols-outlined">
+                    build_circle
+                </span><a href="../config/config.php">OPÇÕES</a></span>
+                </span>
+            </button>
             <button>
                 <span>
                     <div perfil2_container>
@@ -70,36 +75,36 @@ if (isset($_GET['id'])) {
     </aside>
     <article class="principal">
         <div class="linha">
-        <h1>Seguidores</h1>
-        <?php
-        if ($result_seguidores !== false && $result_seguidores->num_rows > 0) {
-            while ($row = $result_seguidores->fetch_assoc()) {
-                $seguidor_id = $row['seguidor_id'];
+            <h1>Seguidores</h1>
+            <?php
+            if ($result_seguidores !== false && $result_seguidores->num_rows > 0) {
+                while ($row = $result_seguidores->fetch_assoc()) {
+                    $seguidor_id = $row['seguidor_id'];
 
-                // Consulta SQL para buscar informações do seguidor
-                $sql_info_seguidor = "SELECT nome, nick, perfil FROM users WHERE id = $seguidor_id";
-                $result_info_seguidor = $conexao->query($sql_info_seguidor);
-                $row_info_seguidor = $result_info_seguidor->fetch_assoc();
+                    // Consulta SQL para buscar informações do seguidor
+                    $sql_info_seguidor = "SELECT nome, nick, perfil FROM users WHERE id = $seguidor_id";
+                    $result_info_seguidor = $conexao->query($sql_info_seguidor);
+                    $row_info_seguidor = $result_info_seguidor->fetch_assoc();
 
-                // Exibir informações do seguidor
-                echo '<a href="person.php?id=' . $seguidor_id . '" class="seguidor-link">';
-                echo '<div class="seguidor">';
-                echo '<div class="perfil-container">';
-                echo '<img src="../cadastro/' . $row_info_seguidor['perfil'] . '" alt="Foto de perfil" class="perfil-imagem">';
-                echo '</div>';
-                echo "<div class='perfil-info'>";
-                echo "<div class='result-item name'>$row_info_seguidor[nick]</div>";
-                echo '</div>';
-                echo '</div>';
-                echo '</a>';
+                    // Exibir informações do seguidor
+                    echo '<a href="person.php?id=' . $seguidor_id . '" class="seguidor-link">';
+                    echo '<div class="seguidor">';
+                    echo '<div class="perfil-container">';
+                    echo '<img src="../cadastro/' . $row_info_seguidor['perfil'] . '" alt="Foto de perfil" class="perfil-imagem">';
+                    echo '</div>';
+                    echo "<div class='perfil-info'>";
+                    echo "<div class='result-item name'>$row_info_seguidor[nick]</div>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                }
+            } else {
+                echo "<p>Nenhum seguidor encontrado.</p>";
             }
-        } else {
-            echo "<p>Nenhum seguidor encontrado.</p>";
-        }
-        $conexao->close();
-        include('../Codigos/modalN.php'); 
-        ?>
-        </article>
-    </body>
+            $conexao->close();
+            include('../Codigos/modalN.php');
+            ?>
+    </article>
+</body>
 
 </html>

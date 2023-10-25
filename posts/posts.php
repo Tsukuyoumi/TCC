@@ -98,12 +98,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span>NOTIFICAÇÕES</span>
                 </span>
             </button>
-            <button>
-                <span>
+            <button><span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span><a href="../up/up.php">ADICIONAR</a></span>
+                    <span>
+                <a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button><br><br><br><br><br>
+            </button>
+            <button><span class="material-symbols-outlined">
+                    build_circle
+                </span><a href="../config/config.php">OPÇÕES</a></span>
+                </span>
+            </button>
             <button>
                 <span>
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
@@ -151,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
     </article>
     <div class="painel">
-    <h2 style="border-bottom: 1px solid white;">Chat</h2>
+        <h2 style="border-bottom: 1px solid white;">Chat</h2>
         <div class="chat">
             <?php
             // Exibir mensagens associadas a esse post

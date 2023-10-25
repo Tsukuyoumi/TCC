@@ -98,6 +98,23 @@ article {
     transition: all 0.50s;
 }
 
+label{
+    font-weight: bold;
+}
+input{
+    border-radius: 10px;
+}
+textarea{
+    border-radius: 10px;
+}
+select{
+    background-color: #ff9900;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+}
+
 /*Form*/
 
 form{
@@ -166,7 +183,28 @@ form input[type="checkbox"]:checked + .checkmark::before{
     background-color: #ff9900;
 }
 
+/*Botão do usuario no fim*/
+.links button:nth-last-child(1) {
+    margin-top: 70px;
+}
 
+.perfil-container {
+    width: 150px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.perfil2 {
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    margin-top: -8px;
+}
+
+#usuario {
+    font-size: 20px;
+}
 
 /*ajuste sidebar*/
 
@@ -205,27 +243,4 @@ form input[type="checkbox"]:checked + .checkmark::before{
     article{
         margin-left: 210px;
     }
-}
-
-/*Botão do usuario no fim*/
-.links button:nth-last-child(1) {
-    margin-top: 70px;
-}
-
-.perfil-container {
-    width: 150px;
-    height: 40px;
-    overflow: hidden;
-}
-
-.perfil2 {
-    width: 45px;
-    height: 45px;
-    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
-    border-radius: 50%; /* Isso cria um recorte circular na imagem */
-    margin-top: -8px;
-}
-
-#usuario {
-    font-size: 20px;
 }

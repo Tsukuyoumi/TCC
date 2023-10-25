@@ -50,9 +50,13 @@ $perfil = "../cadastro/" . $row["perfil"];
             <button>
                 <span>
                     <i class="material-symbols-outlined trans"> Add_circle </i>
-                    <span><a href="../up/up.php">ADICIONAR</a></span>
+                    <span><a href="../up/up.php">ADICIONAR</a>
+            </button>
+            <button><span class="material-symbols-outlined">
+                    build_circle
+                </span><a href="../config/config.php">OPÇÕES</a></span>
                 </span>
-            </button><br><br><br><br><br>
+            </button>
             <button>
                 <span>
                     <div perfil2_container>
@@ -74,9 +78,6 @@ $perfil = "../cadastro/" . $row["perfil"];
                 <div class="perfil-container">
                     <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil-img">
                 </div>
-                <div class="botoes">
-                    <button class="opcao"><a href="../config/config.php">Opções</a></button>
-                </div>
 
                 <h3>
                     <?php echo $nome; ?>
@@ -85,8 +86,12 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <?php echo "🌘" . $tipoArt; ?>
                 </h2>
 
-                <p class="F "><a href="seguidores.php?id=<?php echo $id_user; ?>">Seguidores: <?php echo $num_seguidores; ?></a></p>
-                <p class="S"><a href="seguindo.php?id=<?php echo $id_user; ?>">Seguindo: <?php echo $num_seguindo; ?></a></p>
+                <p class="F "><a href="seguidores.php?id=<?php echo $id_user; ?>">Seguidores:
+                        <?php echo $num_seguidores; ?>
+                    </a></p>
+                <p class="S"><a href="seguindo.php?id=<?php echo $id_user; ?>">Seguindo:
+                        <?php echo $num_seguindo; ?>
+                    </a></p>
 
 
                 <p class="bio" id="bio">

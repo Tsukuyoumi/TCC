@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = mysqli_query($conexao, "UPDATE users SET bio='$bio', perfil='$caminho_destino_perfil', backFoto='$caminho_destino_back', tipoArt='$arte' WHERE id = $id");
 
             if ($result) {
-                header('Location: ../users/user.php');
+                header('Location: ../seguir/seguir.php');
             } else {
                 echo "<script> alert('Erro ao atualizar perfil.'); </script>";
             }

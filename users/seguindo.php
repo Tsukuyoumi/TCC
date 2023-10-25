@@ -62,17 +62,21 @@ if (isset($_GET['id'])) {
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-            </button><br><br><br><br><br>
-            <button>
-                <span>
-                    <div perfil2_container>
-                        <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    </div>
-                    <span><a href="user.php" id="usuario">
-                            <?php echo $nome; ?>
-                        </a></span>
-                </span>
-            </button>
+                <button><span class="material-symbols-outlined">
+                        build_circle
+                    </span><a href="../config/config.php">OPÇÕES</a></span>
+                    </span>
+                </button>
+                <button>
+                    <span>
+                        <div perfil2_container>
+                            <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+                        </div>
+                        <span><a href="user.php" id="usuario">
+                                <?php echo $nome; ?>
+                            </a></span>
+                    </span>
+                </button>
         </nav>
     </aside>
     <article class="principal">
@@ -99,7 +103,7 @@ if (isset($_GET['id'])) {
                 echo '</div>';
                 echo '</div>';
                 echo '</a>';
-                
+
             }
 
             $conexao->close();

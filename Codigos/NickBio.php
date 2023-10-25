@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } elseif (isset($_POST["update_bio"])) {
         // Ação para atualizar a bio
-        $bio = $_POST["bio"];
+        $bio = nl2br($_POST['bio']);
 
         if (!empty($bio)) {
             $stmt = $conexao->prepare("UPDATE users SET bio = ? WHERE id = ?");
