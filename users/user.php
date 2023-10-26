@@ -52,9 +52,9 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a>
             </button>
-            <button><span class="material-symbols-outlined">
-                    build_circle
-                </span><a href="../config/config.php">OPÇÕES</a></span>
+            <button><span> 
+                    <i class="material-symbols-outlined">build_circle </i>
+                <span><a href="../config/config.php">OPÇÕES</a></span>
                 </span>
             </button>
             <button>

@@ -53,9 +53,10 @@ $perfil = "../cadastro/" . $row["perfil"];
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
-            <button><span> <i class="material-symbols-outlined">
-                    build_circle </i>
-                </span><span><a href="config.php">OPÇÕES</a></span>
+            <button><span> 
+                    <i class="material-symbols-outlined">build_circle </i>
+                <span><a href="config.php">OPÇÕES</a></span>
+                </span>
             </button>
             <button>
                 <span>
@@ -96,7 +97,7 @@ $perfil = "../cadastro/" . $row["perfil"];
             </div>
             <div class="cor">
                 <div class="Imagens">
-                    <form action="POST" method="../Codigos/perfilUp.php">
+                    <form action="POST" method="../Codigos/prfilUp.php">
                         <label for="perfil" class="perfil__container">
                             <h1>IMAGEM DE PERFIL</h3>
                                 <input type="file" name="perfil" id="perfil">

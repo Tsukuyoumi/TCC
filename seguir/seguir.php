@@ -85,11 +85,11 @@ $result_check_follow = $conexao->query($sql_check_follow);
 
 if ($result_check_follow->num_rows > 0) {
     echo "<a href='seguir.php?action=unfollow&id=" . $row['id'] . "'>
-        <button style='background-color: #ffbb00; border-radius: 15px; height: 50px; position: absolute; margin-left: 700px; margin-top: -75px; cursor: pointer; font-weight: bold;'>DEIXAR DE SEGUIR</button>
+        <button style='background-color: #ffbb00; border-radius: 15px; height: 50px; position: absolute; margin-left: 650px; margin-top: -75px; cursor: pointer; font-weight: bold;'>SEGUINDO</button>
     </a>";
 } else {
     echo "<a href='seguir.php?action=follow&id=" . $row['id'] . "'>
-        <button style='background-color: #ffbb00; border-radius: 15px; height: 50px; position: absolute; margin-left: 700px; margin-top: -75px; cursor: pointer; font-weight: bold;'>SEGUIR</button>
+        <button style='background-color: #ffbb00; border-radius: 15px; height: 50px; position: absolute; margin-left: 650px; margin-top: -75px; cursor: pointer; font-weight: bold;'>SEGUIR</button>
     </a>";
 }
                         }
@@ -99,7 +99,7 @@ if ($result_check_follow->num_rows > 0) {
                     ?>
                     <form action="seguir.php" method="post">
     <input type="hidden" name="action" value="executar_funcao">
-    <button type="submit" style='background-color: #ffbb00; border-radius: 15px; height: 60px; width: 100px; position: absolute; margin-left: 740px; margin-top: 30px; cursor: pointer;font-weight: bold;'>PROXIMO</button>
+    <button type="submit" style='background-color: #ffbb00; border-radius: 15px; height: 60px; width: 100px; position: absolute; margin-left: 640px; margin-top: 30px; cursor: pointer;font-weight: bold;'>PROXIMO</button>
 </form>
                     </div>        
                     </div>

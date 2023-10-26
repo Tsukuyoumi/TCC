@@ -62,11 +62,11 @@ if (isset($_GET['id'])) {
                     <i class="material-symbols-outlined trans"> Add_circle </i>
                     <span><a href="../up/up.php">ADICIONAR</a></span>
                 </span>
-                <button><span class="material-symbols-outlined">
-                        build_circle
-                    </span><a href="../config/config.php">OPÇÕES</a></span>
-                    </span>
-                </button>
+                <button><span> 
+                    <i class="material-symbols-outlined">build_circle </i>
+                <span><a href="../config/config.php">OPÇÕES</a></span>
+                </span>
+            </button>
                 <button>
                     <span>
                         <div perfil2_container>
