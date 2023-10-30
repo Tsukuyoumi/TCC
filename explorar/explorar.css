@@ -107,6 +107,8 @@ article {
     border-radius: 7px;
     width: 100px;
     height: 40px;
+    text-align: center;
+    font-weight: bold;
 }
 /*ajuste sidebar*/
 

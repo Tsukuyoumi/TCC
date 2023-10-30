@@ -97,7 +97,7 @@ $perfil = "../cadastro/" . $row["perfil"];
             </div>
             <div class="cor">
                 <div class="Imagens">
-                    <form action="POST" method="../Codigos/prfilUp.php">
+                <form action="../Codigos/prfilUp.php" method="POST" enctype="multipart/form-data">
                         <label for="perfil" class="perfil__container">
                             <h1>IMAGEM DE PERFIL</h3>
                                 <input type="file" name="perfil" id="perfil">
@@ -109,7 +109,7 @@ $perfil = "../cadastro/" . $row["perfil"];
                     </form>
                 </div>
                 <div class="Imagens2">
-                    <form action="POST" method="../Codigos/backUp.php">
+                <form action="../Codigos/backUp.php" method="POST" enctype="multipart/form-data">
                         <label for="back">
                             <h1>IMAGEM DE FUNDO</h1>
                             <input type="file" name="back" id="back">
@@ -190,6 +190,9 @@ $perfil = "../cadastro/" . $row["perfil"];
         });
 
     </script>
+    <?php 
+        include('../Codigos/modalN.php');
+    ?>
 </body>
 
 </html>

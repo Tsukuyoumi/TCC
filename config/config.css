@@ -177,7 +177,9 @@ label {
     display: block;
     margin-bottom: 10px;
   }
-
+  #perfil{
+    display: none;
+}
 .perfil__image:hover{
     background-color: rgb(16, 16, 16);
     color: #666666;
@@ -196,7 +198,9 @@ label {
     max-width: 600%;
     max-height: 100%;
 }
-
+#back{
+    display: none;
+}
 .back__image:hover{
     background-color: rgb(16, 16, 16);
     color: #666666;
