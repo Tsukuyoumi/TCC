@@ -228,7 +228,7 @@ h3 {
     height: 45px;
     object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
     border-radius: 50%; /* Isso cria um recorte circular na imagem */
-    margin-top: -8px;
+    margin-top: -4px;
 }
 
 #usuario {

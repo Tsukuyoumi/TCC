@@ -88,7 +88,7 @@
             <select id="tipo" name="tipo">
                 <option value="Pintura">Pintura</option>
                 <option value="Desenho">Desenho</option>
-                <option value="Escultura">Escultura</option>
+                <option value="Arte_digital">Arte_digital</option>
                 <option value="Foto">Fotografia</option>
             </select>
             <br>

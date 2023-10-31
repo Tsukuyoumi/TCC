@@ -59,15 +59,18 @@ $perfil = "../cadastro/" . $row["perfil"];
                 </span>
             </button>
             <button>
-                <span>
-                    <div perfil2_container>
-                        <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
-                    </div>
-                    <span><a href="../users/user.php" id="usuario">
-                            <?php echo $nome; ?>
-                        </a></span>
-                </span>
-            </button>
+    <span>
+        <div perfil2_container>
+            <img src="<?php echo $perfil; ?>" alt="Foto de perfil" class="perfil2">
+        </div>
+        <span id="usuario">
+            <a href="../users/user.php">
+                <?php echo $nome; ?>
+            </a>
+        </span>
+    </span>
+</button>
+
         </nav>
     </aside>
     <article class="principal">

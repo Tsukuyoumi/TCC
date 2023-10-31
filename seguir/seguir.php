@@ -33,11 +33,11 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $num_seguidores = $row['num_seguidores'];
 
-    if ($num_seguidores >= 4) {
+    if ($num_seguidores >= 2) {
         header('Location: ../paginaprincipal.php');
         exit();
     } else {
-        echo "<script>alert('Você deve seguir no mínimo 4 pessoas');</script>";
+        echo "<script>alert('Você deve seguir no mínimo 2 pessoas');</script>";
     }
 } else {
     echo "Erro ao consultar o banco de dados.";
@@ -67,12 +67,12 @@ if ($result->num_rows > 0) {
         <h1>SUGESTÕES</h1>
         
         <div class="usuarios">
-            <h3>Escolha no minimo 4 pessoas para seguir</h2>
+            <h3>Escolha  2 pessoas para seguir</h2>
             <br>
             <div class="perfil3">
                 <div class="perfil3-container">
                     <?php
-                    $sql = "SELECT id, nick, perfil FROM users WHERE id >= 6 AND id <= 9";
+                    $sql = "SELECT id, nick, perfil FROM users WHERE id >= 6 AND id <= 12";
                     $result = $conexao->query($sql);
             
                     if ($result->num_rows > 0) {

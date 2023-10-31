@@ -35,12 +35,8 @@
     <select id="tipo" name="tipoArt">
         <option value="Pintura">Pintura</option>
         <option value="Desenho">Desenho</option>
-        <option value="Arte Digital">Arte Digital</option>
-        <option value="Escultura">Escultura</option>
+        <option value="Arte_Digital">Arte Digital</option>
         <option value="Foto">Fotografia</option>
-        <option value="Arquitetura">Arquitetura</option>
-        <option value="Design">Design</option>
-        <option value="Gravura">Gravura</option>
     </select>
     <br>		<br>		<br>
     <label for="bio">Fale sobre você:</label>
@@ -48,8 +44,6 @@
         placeholder="Fale um pouco sobre você! <br> no maximo 5 linhas"></textarea>
     <p></p>
     <input class="enviar" type="submit" name="submit" value="Enviar">
-    <button class="enviar"><a href="../paginaPrincipal.php">Pular etapa</a></button>
-
 </form>
 
 <script>

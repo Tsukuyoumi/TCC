@@ -262,7 +262,7 @@ echo '</div>';
             // Execute a consulta SQL para obter os posts de usuários que têm seguidores acima da média e que você não segue na data atual
             $sql = "SELECT p.id, p.id_user, p.imagem, p.nome, p.data, u.nick, CONCAT('cadastro/', u.perfil) as perfil
        FROM posts p
-       LEFT JOIN seguidores s ON p.id_user = s.seguindo_id AND s.seguidor_id = $id_user
+       LEFT JOIN seguidores s ON p.id_user = s.seguindo_id AND s.seguidor_id = $id_user 
        LEFT JOIN users u ON p.id_user = u.id  -- Adicione esta linha
        WHERE s.seguidor_id IS NULL
        AND DATE(p.data) = '$data_atual'
@@ -278,7 +278,7 @@ echo '</div>';
                     // Exiba o conteúdo do post
                     echo '<a href="posts/posts.php?id=' . $row['id'] . '">';
                     echo '<div class="result2" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                    echo "<p class='titulosP'>" . $row['nome'] . '</p>';
+                    echo "<p class='titulosP' id='titulosP'>" . $row['nome'] . '</p>';
                     echo '<img src="' . $row['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
                     echo '<div class="center">';
                     echo '<img src="' . $row['perfil'] . '" alt="Perfil do Usuário" style="margin-top:1px; width: 45px; height: 43px; object-fit: cover; border-radius: 50%;">';
@@ -302,8 +302,14 @@ echo '</div>';
         include('Codigos/modalN.php');
         ?>
  </div>
-        <script>             // ... (seu código JavaScript) ...
-        </script>
+ <script>
+    const titleContainer = document.querySelector('.title-container');
+
+    // Ajuste a margem superior quando o conteúdo quebrar para uma nova linha
+    if (titleContainer.offsetHeight > titleContainer.clientHeight) {
+        titleContainer.style.marginTop = '-10px'; // Mova 10 pixels para cima
+    }
+</script>
 
 </body>
 

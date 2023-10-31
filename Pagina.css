@@ -2,11 +2,13 @@ body {
     background-color: rgb(15, 15, 15);
     color: white;
 }
-.posts-h1{
+
+.posts-h1 {
     color: white;
     margin-left: 220px;
 }
-p{
+
+p {
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -26,6 +28,7 @@ aside {
     padding: 0;
     transition: all 0.50s;
 }
+
 
 #logo {
     width: 100%;
@@ -92,21 +95,18 @@ aside {
 .perfil2 {
     width: 45px;
     height: 45px;
-    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
-    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    object-fit: cover;
+    /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%;
+    /* Isso cria um recorte circular na imagem */
     margin-top: -8px;
 }
-
-#usuario {
-    font-size: 20px;
-}
-
-
 
 /*Conteudo*/
 .article {
     display: inline-flex;
-    flex-direction: row; /* Mantenha "row" para exibir duas colunas */
+    flex-direction: row;
+    /* Mantenha "row" para exibir duas colunas */
     margin-left: 210px;
     width: 84%;
     height: 100%;
@@ -114,15 +114,21 @@ aside {
     transition: all 0.50s;
 }
 
+#usuario{
+    font-size: 20px;
+}
 
-.perfildono{
+.perfildono {
     width: 45px;
     height: 45px;
-    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
-    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    object-fit: cover;
+    /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%;
+    /* Isso cria um recorte circular na imagem */
 
 }
-.nomedono{
+
+.nomedono {
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -130,42 +136,50 @@ aside {
     margin-top: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-.center{
+
+.center {
     position: absolute;
     display: flex;
     flex-direction: row;
     margin-left: 15px;
     margin-top: -63px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 2px 6px 2px; 
+    padding: 2px 6px 2px;
     height: 45px;
     border-radius: 20px;
 }
-.um{
-}
-.titulosP{
+
+.titulosP {
     position: absolute;
-    margin-top: 400px;
+    margin-top: 380px;
     margin-left: 35px;
     font-size: 20px;
     font-weight: bold;
     color: white;
     text-decoration: none;
     background: rgba(0, 0, 0, 0.5);
-    padding: 5px; 
+    padding: 5px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
+    max-width: 200px;
+    /* Defina o valor apropriado para o limite de largura */
+    word-wrap: break-word;
+    /* Quebra de palavra quando o texto ultrapassa o limite de largura */
+    line-height: 1.2;
 }
 
 
-.perfildono{
+.perfildono {
     width: 45px;
     height: 45px;
-    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
-    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+    object-fit: cover;
+    /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%;
+    /* Isso cria um recorte circular na imagem */
 
 }
-.nomedono{
+
+.nomedono {
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -173,20 +187,18 @@ aside {
     margin-top: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-.centro{
+
+.centro {
     position: absolute;
     display: flexbox;
     flex-direction: row;
     margin-left: 15px;
     margin-top: -63px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 2px 6px 2px; 
+    padding: 2px 6px 2px;
     height: 45px;
     border-radius: 20px;
 }
-
-
-
 
 /*ajuste sidebar*/
 
@@ -221,7 +233,7 @@ aside {
 }
 
 @media (width < 1366px) {
-    article{
+    article {
         margin-left: 210px;
     }
 }

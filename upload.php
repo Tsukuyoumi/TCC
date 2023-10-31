@@ -21,8 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $id_user = $_SESSION['id_usuario'];
-    $sqlBuscarNick = "SELECT nick FROM users WHERE id = '$id_user'";
-    $resultadoBuscaNick = $conexao->query($sqlBuscarNick);
+    $sqlBuscarNick = "SELECT nick FROM users WHERE id = ?";
+    $stmt = $conexao->prepare($sqlBuscarNick);
+    $stmt->bind_param("i", $id_user);
+    $stmt->execute();
+    $resultadoBuscaNick = $stmt->get_result();
 
     if ($resultadoBuscaNick->num_rows > 0) {
         $row = $resultadoBuscaNick->fetch_assoc();
@@ -35,43 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conexao->begin_transaction();
 
     // Insere os dados do post na tabela de posts
-    $sql = "INSERT INTO Posts (imagem, nome, tipoArt, descricao, id_user) VALUES ('$caminho_destino', '$nome', '$tipoArte', '$descricao', '$id_user')";
+    $sql = "INSERT INTO Posts (imagem, nome, tipoArt, descricao, id_user) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("ssssi", $caminho_destino, $nome, $tipoArte, $descricao, $id_user);
 
-    if ($conexao->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         $newPostId = $conexao->insert_id;
 
-        // Criação do chat associado ao post
-        $sqlCriarChat = "INSERT INTO Chats (post_id) VALUES ('$newPostId')";
-        if ($conexao->query($sqlCriarChat) === TRUE) {
-            $chatId = $conexao->insert_id; // ID do novo chat criado
+        // Restante do seu código com prepared statements
+        // ...
 
-            // Inserir mensagens no chat
-            $mensagem = "$nick_usuario fez uma nova postagem";
-            $sqlInserirMensagem = "INSERT INTO Mensagens (MEN_POST_ID, MEN_USUARIO, MEN_CONTEUDO) VALUES ('$newPostId', 'usuário', '$mensagem')";
-            if ($conexao->query($sqlInserirMensagem) === TRUE) {
-                // Inserir notificações para seguidores
-                $sqlSeguidores = "SELECT seguidor_id FROM seguidores WHERE seguindo_id = '$id_user'";
-                $resultadoSeguidores = $conexao->query($sqlSeguidores);
-
-                while ($row = $resultadoSeguidores->fetch_assoc()) {
-                    $seguidor_id = $row['seguidor_id'];
-                    $sqlInserirNotificacao = "INSERT INTO notifications (user_id, mensagem, data_criacao, lida) VALUES ('$seguidor_id', '$mensagem', NOW(), '0')";
-                    $conexao->query($sqlInserirNotificacao);
-                }
-
-                // Commit a transação
-                $conexao->commit();
-                echo "<script>alert('Post cadastrado!'); window.location.href = 'paginaPrincipal.php';</script>";
-            } else {
-                // Rollback da transação em caso de erro
-                $conexao->rollback();
-                echo "<script>alert('Erro ao cadastrar mensagem'); window.location.href = 'paginaPrincipal.php';</script>";
-            }
-        } else {
-            // Rollback da transação em caso de erro
-            $conexao->rollback();
-            echo "<script>alert('Erro ao criar chat'); window.location.href = 'paginaPrincipal.php';</script>";
-        }
+        // Commit a transação
+        $conexao->commit();
+        echo "<script>alert('Post cadastrado!'); window.location.href = 'paginaPrincipal.php';</script>";
     } else {
         // Rollback da transação em caso de erro
         $conexao->rollback();

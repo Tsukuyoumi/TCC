@@ -71,7 +71,7 @@
                 <option value="">Filtro</option>
                 <option value="Pintura">Pintura</option>
                 <option value="Desenho">Desenho</option>
-                <option value="Escultura">Escultura</option>
+                <option value="Escultura">Arte_digital</option>
                 <option value="Fotografia">Fotografia</option>
             </select>
 
