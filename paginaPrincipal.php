@@ -48,9 +48,9 @@ include_once("cadastro/conexao.php");
                     <span><a href="up/up.php">ADICIONAR</a></span>
                 </span>
             </button>
-            <button><span> 
+            <button><span>
                     <i class="material-symbols-outlined">build_circle </i>
-                <span><a href="config/config.php">OPÇÕES</a></span>
+                    <span><a href="config/config.php">OPÇÕES</a></span>
                 </span>
             </button>
             <button>
@@ -66,336 +66,243 @@ include_once("cadastro/conexao.php");
     </aside>
     <h1 class="posts-h1">Postagens</h1>
 
-    
-
-    <article>
+        <div class="article">
         <?php
-        $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
-        $result_seguindo = $conexao->query($query_seguindo);
+       $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
+       $result_seguindo = $conexao->query($query_seguindo);
+       
+       $seguindo_ids = array();
+       while ($row_seguindo = $result_seguindo->fetch_assoc()) {
+           $seguindo_ids[] = $row_seguindo['seguindo_id'];
+       }
+       
+       $ids_seguindo = implode(',', $seguindo_ids);
+       
+       $data_atual = '2023-10-31 17:00:00'; // Início às 5 da tarde em 01/11/2023
+$data_minima = '2023-10-31 09:00:00'; // Fim às 9 da manhã em 01/11/2023
 
-        $seguindo_ids = array();
-        while ($row_seguindo = $result_seguindo->fetch_assoc()) {
-            $seguindo_ids[] = $row_seguindo['seguindo_id'];
-        }
+       
+       // Loop até não haver mais posts para buscar
+       echo '<div class="um">';
+while (true) {
+    $sql = "SELECT p.id, p.id_user, p.imagem, p.data, p.nome, u.nick, CONCAT('cadastro/', u.perfil) as perfil
+    FROM posts p
+    INNER JOIN users u ON p.id_user = u.id
+    WHERE p.id_user IN ($ids_seguindo)
+    AND p.data >= '$data_minima' AND p.data <= '$data_atual'
+    ORDER BY p.data DESC";
 
-        if (!empty($seguindo_ids)) {
-            $in_clause = implode(",", $seguindo_ids);
+    // Execute a consulta e processe os resultados
+    $result = $conexao->query($sql);
 
-            $query_posts = "SELECT id, imagem, id_user, nome FROM posts WHERE id_user IN ($in_clause) ORDER BY data DESC";
-            $result_posts = $conexao->query($query_posts);
+    // Verifique se há algum post no período especificado
+    if ($result->num_rows > 0) {
+        echo '<div class="row">'; // Abre uma nova linha
 
-            $posts_per_column = ceil($result_posts->num_rows / 2); // Calcula quantos posts por coluna
-            $current_column = 1;
-            $post_count = 0;
-
-            echo '<div class="imagens">';
-
-            while ($row_posts = $result_posts->fetch_assoc()) {
-                // Adicione esta consulta para buscar o nome e o perfil do usuário
-                $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                $result_user = $conexao->query($query_user);
-                $row_user = $result_user->fetch_assoc();
-
-                if ($post_count == $posts_per_column) {
-                    echo '</div><div class="imagens">';
-                    $post_count = 0;
-                }
-
-                echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                echo "<p class='titulosP'>{$row_posts['nome']}{$row_user['nick']}</p>";
-                echo '</div>';
-
-                echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
-                echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                echo '</div>';
-
-                echo '</a>';
-
-                $post_count++;
-            }
-
-
+        // Exibe a primeira coluna
+        echo '<div class="column">';
+        while ($row = $result->fetch_assoc()) {
+            // Exiba o conteúdo do post, incluindo o nome de usuário (nick)
+            echo '<a href="posts/posts.php?id=' . $row['id'] . '">';
+            echo '<div class="result" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+            echo "<p class='titulosP'>" . $row['nome'] . '</p>';
+            echo '<img src="' . $row['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+            echo '<div class="center">';
+            echo '<img src="' . $row['perfil'] . '" alt="Perfil do Usuário" style="margin-top:1px; width: 45px; height: 43px; object-fit: cover; border-radius: 50%;">';
+            echo "<p class='nickn'>" . $row['nick'] . '</p>';
             echo '</div>';
-        }
-
-
-        // Obtendo os IDs das pessoas que você está seguindo
-        $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
-        $result_seguindo = $conexao->query($query_seguindo);
-
-        $seguindo_ids = array();
-        while ($row_seguindo = $result_seguindo->fetch_assoc()) {
-            $seguindo_ids[] = $row_seguindo['seguindo_id'];
-        }
-
-        // Obtendo o seu próprio ID de usuário
-        $meu_id = $id_user;
-
-        // Obtendo os IDs de todos os usuários
-        $query_todos_usuarios = "SELECT id FROM users";
-        $result_todos_usuarios = $conexao->query($query_todos_usuarios);
-
-        $todos_usuarios_ids = array();
-        while ($row_todos_usuarios = $result_todos_usuarios->fetch_assoc()) {
-            $todos_usuarios_ids[] = $row_todos_usuarios['id'];
-        }
-
-        // Filtrando os IDs de usuários que não estão sendo seguidos (exceto você)
-        $nao_seguindo_ids = array_diff($todos_usuarios_ids, $seguindo_ids, array($meu_id));
-        if (!empty($acima_media_ids)) {
-            $in_clause = implode(",", $acima_media_ids);
-
-            // Obtendo os posts dos usuários que não estão sendo seguidos, têm número de seguidores acima da média
-            // e ordenando pela data
-            $query_posts = "
-            SELECT id, imagem, nome, id_user, data
-            FROM posts
-            WHERE id_user IN ($in_clause)
-            ORDER BY data DESC
-            ";
-
-            $result_posts = $conexao->query($query_posts);
-
-            $column = 1;
-            echo '<div class="imagens">';
-
-            while ($row_posts = $result_posts->fetch_assoc()) {
-
-                $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                $result_user = $conexao->query($query_user);
-                $row_user = $result_user->fetch_assoc();
-
-                echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
-                echo '</div>';
-                echo '<div class="centro">';
-                echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
-                echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                echo '</div>';
-                echo '</a>';
-
-                if ($column == 2) {
-                    echo '</div><div class="imagens">';
-                }
-
-                $column = ($column == 1) ? 2 : 1;
-            }
-
             echo '</div>';
+            echo '</a>';
         }
+        echo '</div>'; // Fecha a primeira coluna
 
-        // Calculando a média do número de seguidores
-        $query_contar_seguindo = "SELECT COUNT(*) AS numero_seguindo FROM seguidores WHERE seguidor_id = '$meu_id'";
+        echo '</div>'; // Fecha a linha
+    }
 
-        // Execute a consulta
-        $resultado_contar_seguindo = $conexao->query($query_contar_seguindo);
+    // Vá para a data anterior (um dia antes) para a próxima iteração do loop
+    $data_atual = date("Y-m-d H:i:s", strtotime($data_atual . " -1 day"));
 
-        if ($resultado_contar_seguindo) {
-            $row_contar_seguindo = $resultado_contar_seguindo->fetch_assoc();
-            $numero_seguindo = $row_contar_seguindo['numero_seguindo'];
+    // Se a data atual for anterior à data mínima, saia do loop
+    if ($data_atual < $data_minima) {
+        break;
+    }
+}
+echo '</div>';
 
+    ///////
+    $query_seguindo = "SELECT seguindo_id FROM seguidores WHERE seguidor_id = $id_user";
+    $result_seguindo = $conexao->query($query_seguindo);
+    
+    $seguindo_ids = array();
+    while ($row_seguindo = $result_seguindo->fetch_assoc()) {
+        $seguindo_ids[] = $row_seguindo['seguindo_id'];
+    }
+    
+    $ids_seguindo = implode(',', $seguindo_ids);
+    
+    $data_atual = '2023-10-31 08:59:00'; // Início às 9 da manhã em 01/11/2023
+$data_minima = '2023-10-30 00:00:00'; // Fim no início do dia em 31/10/2023
 
-            if ($numero_seguindo == 0) {
-                // Obter a média de seguidores
-                $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
-                $result_media_seguidores = $conexao->query($query_media_seguidores);
-                $row_media_seguidores = $result_media_seguidores->fetch_assoc();
-                $media_seguidores = $row_media_seguidores['media_seguidores'];
+    
+    // Loop até não haver mais posts para buscar
+    echo '<div class="um">';
+while (true) {
+    $sql = "SELECT p.id, p.id_user, p.imagem, p.data, p.nome, u.nick, CONCAT('cadastro/', u.perfil) as perfil
+    FROM posts p
+    INNER JOIN users u ON p.id_user = u.id
+    WHERE p.id_user IN ($ids_seguindo)
+    AND p.data >= '$data_minima' AND p.data < '$data_atual'
+    ORDER BY p.data DESC";
 
-                // Obter os IDs dos usuários que você não segue e cujo número de seguidores está abaixo da média
-                $query_usuarios_abaixo_media = "
-    SELECT u.id
-    FROM users u
-    WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) < $media_seguidores
-";
+    // Execute a consulta e processe os resultados
+    $result = $conexao->query($sql);
 
-                $result_usuarios_abaixo_media = $conexao->query($query_usuarios_abaixo_media);
+    // Verifique se há algum post no período especificado
+    if ($result->num_rows > 0) {
+        echo '<div class="row">'; // Abre uma nova linha
 
-                $nao_seguindo_ids = array();
-                while ($row_usuarios_abaixo_media = $result_usuarios_abaixo_media->fetch_assoc()) {
-                    $nao_seguindo_ids[] = $row_usuarios_abaixo_media['id'];
-                }
-                /*************************Ver essa parte *******************************************************/
-                if (!empty($nao_seguindo_ids)) {
-                    $in_clause = implode(",", $nao_seguindo_ids);
+        // Exibe a primeira coluna
+        echo '<div class="column">';
+        while ($row = $result->fetch_assoc()) {
+            // Exiba o conteúdo do post, incluindo o nome de usuário (nick)
+            echo '<a href="posts/posts.php?id=' . $row['id'] . '">';
+            echo '<div class="result" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+            echo "<p class='titulosP'>" . $row['nome'] . '</p>';
+            echo '<img src="' . $row['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+            echo '<div class="center">';
+            echo '<img src="' . $row['perfil'] . '" alt="Perfil do Usuário" style="margin-top:1px; width: 45px; height: 43px; object-fit: cover; border-radius: 50%;">';
+            echo "<p class='nickn'>" . $row['nick'] . '</p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</a>';
+        }
+        echo '</div>'; // Fecha a primeira coluna
 
-                    // Obter os posts dos usuários que não estão sendo seguidos e têm número de seguidores abaixo da média
-                    $query_posts = "
-        SELECT id, imagem, nome, id_user, data
-        FROM posts
-        WHERE id_user IN ($in_clause)
-        ORDER BY data DESC
-    ";
+        echo '</div>'; // Fecha a linha
+    }
 
-                    $result_posts = $conexao->query($query_posts);
+    // Vá para a data anterior (um dia antes) para a próxima iteração do loop
+    $data_atual = date("Y-m-d H:i:s", strtotime($data_atual . " -1 day"));
 
-                    $column = 1;
-                    echo '<div class="imagens">';
+    // Se a data atual for anterior à data mínima, saia do loop
+    if ($data_atual < $data_minima) {
+        break;
+    }
+}
+echo '</div>';
+    
+                echo '<div class="um">';
+?>
+        <?php
+        /////////////////////////////////////
+        // Calcular a média de seguidores por usuário
+        $query_media_seguidores = "SELECT AVG(num_seguidores) as media_seguidores FROM (SELECT id, COUNT(*) as num_seguidores FROM seguidores GROUP BY id) as temp";
+        $result_media_seguidores = $conexao->query($query_media_seguidores);
+        $row_media_seguidores = $result_media_seguidores->fetch_assoc();
+        $media_seguidores = $row_media_seguidores['media_seguidores'];
 
-                    while ($row_posts = $result_posts->fetch_assoc()) {
+        $data_atual = date("Y-m-d");
+        $data_minima = '2012-01-01';
 
-                        $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                        $result_user = $conexao->query($query_user);
-                        $row_user = $result_user->fetch_assoc();
+        // Loop até não haver mais posts para buscar
+        while (true) {
+            // Execute a consulta SQL para obter os posts de usuários que têm seguidores acima da média e que você não segue na data atual
+            $sql = "SELECT p.id, p.id_user, p.imagem, p.data,p.nome, u.nick, CONCAT('cadastro/', u.perfil) as perfil
+            FROM posts p
+            LEFT JOIN users u ON p.id_user = u.id
+            LEFT JOIN seguidores s ON p.id_user = s.seguindo_id AND s.seguidor_id = $id_user
+            WHERE s.seguidor_id IS NULL
+            AND DATE(p.data) = '$data_atual'
+            AND (SELECT COUNT(*) FROM seguidores s2 WHERE s2.seguindo_id = p.id_user) > $media_seguidores
+            ORDER BY p.data DESC";
 
-                        echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                        echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">'; // Largura reduzida para acomodar quatro colunas
-                        echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                        echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
-                        echo '</div>';
-                        echo '<div class="centro">';
-                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
-                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                        echo '</div>';
-                        echo '</a>';
+            // Execute a consulta e processe os resultados
+            $result = $conexao->query($sql);
 
-                        if ($column == 4) { // Mudança para quatro colunas
-                            echo '</div><div class="imagens">';
-                            $column = 1;
-                        } else {
-                            $column++;
-                        }
-                    }
-
+            // Verifique se há algum post na data atual
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Exiba o conteúdo do post, incluindo o nome de usuário (nick)
+                    echo '<a href="posts/posts.php?id=' . $row['id'] . '">';
+                    echo '<div class="result" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+                    echo "<p class='titulosP'>" . $row['nome'] . '</p>';
+                    echo '<img src="' . $row['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+                    echo '<div class="center">';
+                    echo '<img src="' . $row['perfil'] . '" alt="Perfil do Usuário" style="margin-top:1px; width: 45px; height: 43px; object-fit: cover; border-radius: 50%;">';
+                    echo "<p class='nickn'>" . $row['nick'] . '</p>';
                     echo '</div>';
-                }
-            } else {
-                $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
-                $result_media_seguidores = $conexao->query($query_media_seguidores);
-                $row_media_seguidores = $result_media_seguidores->fetch_assoc();
-                $media_seguidores = $row_media_seguidores['media_seguidores'];
-
-                // Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está abaixo da média
-                $query_usuarios_nao_seguidos = "
-                SELECT u.id
-                FROM users u
-                WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) < " . $media_seguidores;
-
-
-                $result_usuarios_nao_seguidos = $conexao->query($query_usuarios_nao_seguidos);
-
-                $nao_seguindo_ids = array();
-                while ($row_usuarios_nao_seguidos = $result_usuarios_nao_seguidos->fetch_assoc()) {
-                    $nao_seguindo_ids[] = $row_usuarios_nao_seguidos['id'];
-                }
-
-                if (!empty($nao_seguindo_ids)) {
-                    $in_clause = implode(",", $nao_seguindo_ids);
-
-                    // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
-                    $query_posts = "
-                     SELECT id, imagem, nome, id_user, data
-                    FROM posts
-                    WHERE id_user IN ($in_clause)
-                    ORDER BY data DESC
-                    ";
-
-                    $result_posts = $conexao->query($query_posts);
-
-                    $column = 1;
-                    echo '<div class="imagens">';
-
-                    while ($row_posts = $result_posts->fetch_assoc()) {
-
-                        $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                        $result_user = $conexao->query($query_user);
-                        $row_user = $result_user->fetch_assoc();
-
-                        echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                        echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                        echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                        echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
-                        echo '</div>';
-                        echo '<div class="centro">';
-                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
-                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                        echo '</div>';
-                        echo '</a>';
-
-                        if ($column == 2) {
-                            echo '</div><div class="imagens">';
-                        }
-
-                        $column = ($column == 1) ? 1 : 1;
-                    }
-
                     echo '</div>';
+                    echo '</a>';
                 }
-                $query_media_seguidores = "SELECT AVG(num_seguidores) AS media_seguidores FROM (SELECT seguindo_id, COUNT(*) AS num_seguidores FROM seguidores GROUP BY seguindo_id) AS tmp";
-                $result_media_seguidores = $conexao->query($query_media_seguidores);
-                $row_media_seguidores = $result_media_seguidores->fetch_assoc();
-                $media_seguidores = $row_media_seguidores['media_seguidores'];
+            }
 
-                // Obtendo os IDs dos usuários que você não segue e cujo número de seguidores está acima da média
-                $query_usuarios_acima_media = "
-                SELECT u.id
-                FROM users u
-                WHERE u.id <> '$meu_id' AND u.id NOT IN (SELECT seguindo_id FROM seguidores WHERE seguidor_id = '$meu_id') AND (SELECT COUNT(*) FROM seguidores WHERE seguindo_id = u.id) > $media_seguidores
-                ";
+            // Vá para a data anterior (um dia antes) para a próxima iteração do loop
+            $data_atual = date("Y-m-d", strtotime($data_atual . " -1 day"));
 
-                $result_usuarios_acima_media = $conexao->query($query_usuarios_acima_media);
-
-                $nao_seguindo_ids = array();
-                while ($row_usuarios_acima_media = $result_usuarios_acima_media->fetch_assoc()) {
-                    $nao_seguindo_ids[] = $row_usuarios_acima_media['id'];
-                }
-
-                if (!empty($nao_seguindo_ids)) {
-                    $in_clause = implode(",", $nao_seguindo_ids);
-
-                    // Obtendo os posts dos usuários que não estão sendo seguidos e têm número de seguidores acima da média
-                    $query_posts = "
-                    SELECT id, imagem, nome, id_user, data
-                    FROM posts
-                WHERE id_user IN ($in_clause)
-                ORDER BY data DESC
-                ";
-
-                    $result_posts = $conexao->query($query_posts);
-
-                    $column = 1;
-                    echo '<div class="imagens">';
-
-                    while ($row_posts = $result_posts->fetch_assoc()) {
-
-                        $query_user = "SELECT nick, perfil FROM users WHERE id = {$row_posts['id_user']}";
-                        $result_user = $conexao->query($query_user);
-                        $row_user = $result_user->fetch_assoc();
-
-                        echo '<a href="posts/posts.php?id=' . $row_posts['id'] . '">';
-                        echo '<div class="result-item post" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
-                        echo '<img src="' . $row_posts['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
-                        echo "<p class='titulosP'>{$row_posts['nome']}</p>"; // Corrected line
-                        echo '</div>';
-                        echo '<div class="centro">';
-                        echo "<img class='perfildono' src='cadastro/" . $row_user['perfil'] . "'>";
-                        echo "<p class='nomedono'> {$row_user['nick']}</p>";
-                        echo '</div>';
-                        echo '</a>';
-
-                        if ($column == 2) {
-                            echo '</div><div class="imagens">';
-                        }
-
-                        $column = ($column == 1) ? 1 : 1; // Corrigindo a alternância das colunas
-                    }
-
-                    echo '</div>';
-                }
-
+            // Se a data atual for anterior à data mínima, saia do loop
+            if ($data_atual < $data_minima) {
+                break;
             }
         }
+        echo '</div>';
+        echo '<div class="dois">';
+
+        ////////
+        $query_media_seguidores = "SELECT AVG(num_seguidores) as media_seguidores FROM (SELECT id, COUNT(*) as num_seguidores FROM seguidores GROUP BY id) as temp";
+        $result_media_seguidores = $conexao->query($query_media_seguidores);
+        $row_media_seguidores = $result_media_seguidores->fetch_assoc();
+        $media_seguidores = $row_media_seguidores['media_seguidores'];
+
+        $data_atual = date("Y-m-d");
+        $data_minima = '2012-01-01';
+
+        // Loop até não haver mais posts para buscar
+        while (true) {
+
+            // Execute a consulta SQL para obter os posts de usuários que têm seguidores acima da média e que você não segue na data atual
+            $sql = "SELECT p.id, p.id_user, p.imagem, p.nome, p.data, u.nick, CONCAT('cadastro/', u.perfil) as perfil
+       FROM posts p
+       LEFT JOIN seguidores s ON p.id_user = s.seguindo_id AND s.seguidor_id = $id_user
+       LEFT JOIN users u ON p.id_user = u.id  -- Adicione esta linha
+       WHERE s.seguidor_id IS NULL
+       AND DATE(p.data) = '$data_atual'
+       AND (SELECT COUNT(*) FROM seguidores s2 WHERE s2.seguindo_id = p.id_user) < $media_seguidores
+       ORDER BY p.data DESC";
+
+            // Execute a consulta e processe os resultados
+            $result = $conexao->query($sql);
+
+            // Verifique se há algum post na data atual
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Exiba o conteúdo do post
+                    echo '<a href="posts/posts.php?id=' . $row['id'] . '">';
+                    echo '<div class="result2" style="width: 257px; height: 500px; padding: 5px; margin-top: 10px;">';
+                    echo "<p class='titulosP'>" . $row['nome'] . '</p>';
+                    echo '<img src="' . $row['imagem'] . '" alt="Imagem do Post" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">';
+                    echo '<div class="center">';
+                    echo '<img src="' . $row['perfil'] . '" alt="Perfil do Usuário" style="margin-top:1px; width: 45px; height: 43px; object-fit: cover; border-radius: 50%;">';
+                    echo "<p class='nickn'>" . $row['nick'] . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                }
+            }
+
+            // Vá para a data anterior (um dia antes) para a próxima iteração do loop
+            $data_atual = date("Y-m-d", strtotime($data_atual . " -1 day"));
+
+            // Se a data atual for anterior à data mínima, saia do loop
+            if ($data_atual < $data_minima) {
+                break;
+            }
+        }
+        echo '</div>';
+
         include('Codigos/modalN.php');
         ?>
-
-
-        <script>
-            // ... (seu código JavaScript) ...
+ </div>
+        <script>             // ... (seu código JavaScript) ...
         </script>
 
 </body>

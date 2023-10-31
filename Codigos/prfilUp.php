@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $imagem_temporaria_perfil = $_FILES['perfil']['tmp_name'];
         $nome_imagem_perfil = $_FILES['perfil']['name'];
-        $caminho_destino_perfil = '../cadastro/fotosPerfil/' . $nome_imagem_perfil;
+        $caminho_destino_perfil = 'fotosPerfil/' . $nome_imagem_perfil;
 
         if (move_uploaded_file($imagem_temporaria_perfil, $caminho_destino_perfil)) {
 

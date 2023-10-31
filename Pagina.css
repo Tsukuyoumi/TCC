@@ -6,6 +6,11 @@ body {
     color: white;
     margin-left: 220px;
 }
+p{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 /*Sidebar*/
 aside {
@@ -99,33 +104,48 @@ aside {
 
 
 /*Conteudo*/
-article {
-    display: flex;
+.article {
+    display: inline-flex;
     flex-direction: row; /* Mantenha "row" para exibir duas colunas */
-    margin-left: 220px;
+    margin-left: 210px;
     width: 84%;
     height: 100%;
     top: 0;
     transition: all 0.50s;
 }
 
-.result-item.post {
-    width: 48%; /* Use uma porcentagem que funcione bem para duas colunas */
-    height: 500px;
-    padding: 5px;
+
+.perfildono{
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
+    border-radius: 50%; /* Isso cria um recorte circular na imagem */
+
+}
+.nomedono{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 15px;
     margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
-.result-item.post img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+.center{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+    margin-top: -63px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px 2px; 
+    height: 45px;
+    border-radius: 20px;
 }
-
+.um{
+}
 .titulosP{
     position: absolute;
-    margin-top: -100px;
+    margin-top: 400px;
     margin-left: 35px;
     font-size: 20px;
     font-weight: bold;
@@ -136,6 +156,8 @@ article {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
 }
+
+
 .perfildono{
     width: 45px;
     height: 45px;
@@ -153,7 +175,7 @@ article {
 }
 .centro{
     position: absolute;
-    display: flex;
+    display: flexbox;
     flex-direction: row;
     margin-left: 15px;
     margin-top: -63px;
@@ -162,6 +184,10 @@ article {
     height: 45px;
     border-radius: 20px;
 }
+
+
+
+
 /*ajuste sidebar*/
 
 @media (width < 1020px) {

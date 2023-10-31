@@ -131,9 +131,9 @@ article {
     margin-bottom: 40px; 
 }
 .Foto{
-    width: 1000px;
-    margin-left: -180px;
-    margin-top: 80px;
+    width: 990px;
+    margin-left: -200px;
+    margin-top: 30px;
     margin-bottom: 40px;
     border: 1px solid rgba(136, 136, 136, 0.521);
     border-radius: 20px;
@@ -150,15 +150,27 @@ article {
     margin-bottom: -20px;
 }
 .posts{
-    position: absolute;
-    margin-left: 830px;
-    margin-top: -500px;
-    margin-right:10px;
+    margin-left: 810px;
+    margin-top: -545px;
+    margin-right: 20px;
     background-color: rgba(255, 255, 255, 0.08);
     padding: 10px;
     border-radius: 20px;
 }
-
+.um{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-top: -200px;
+}
+.conteudpsAd{
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    margin-left: -200px;
+    margin-right: 20px;
+}
 /*ajuste sidebar*/
 
 @media (width < 1020px) {

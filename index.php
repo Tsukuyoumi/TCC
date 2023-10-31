@@ -43,12 +43,20 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
             <br>            <br>
 
             <div class="Sobre">
-                <p>&nbsp;&nbsp;&nbsp;Ao primeiro momento em que você entra na pagina, pelo fato de não seguir niguem o ststema opta por te mostar 4 colunas de posts de pessoas que estão a baixo da media de seguidores, media essa que é feita somando todos os numeros de pessoas seguidas pelos usuarios do site e então divide pelo numero de usuarios do site.</p>           </div>
+                <p>&nbsp;&nbsp;&nbsp;Ao se cadastrar no site ele pede para você seguir um numero minimo de pessoas, isso de para que os sistema funcione perfeitamente aasssim logo na primeira pagina, home a pagina dos posts, você se deparara com 4 colunas de posts explicadas a seguir.</p>           </div>
             <div class="post">
                 <img class="Foto" src="icones\Ap1.png" alt="logo">
-                <p class="posts"> &nbsp;&nbsp;&nbsp;As duas primeiras colunas são para posts de pessoas a qual você segue.<br>
-                     &nbsp;&nbsp;&nbsp;As duas ultimas colunas são para posts de pessoas a qual você não segue, sendo a primeira de pessoas com grau de visibilidade a cima da media, já a ultima é para pessoas novas terem mais visibilidade.
+                <p class="posts"> &nbsp;&nbsp;&nbsp;Inicialmente o codigo faz uma analize das pessoas que você segue e busca seus ultimos posts e então forma duas colunas com ele, as duas colunas da esquerda.<br>
+                     &nbsp;&nbsp;&nbsp;Em seguida é feito um calculo do numero de seguidores e da media das pessoas para que então seja formadas a terceira coluna, essa coluna mostra os posts de pessoas que estão a cima dessa media, seguino para a quarta coluna, aqui podemos ver a coluna de pessoas que estão a baixo dessa média, essa coluna existe para que pessoas novas ou com baixos seguidores possam ganhar mais visibilidade.
             </p>
+            <div class="conteudpsAd">
+                <p>
+                &nbsp;&nbsp;&nbsp;A pagina de opções é o local onde você pode trocar seus  (apelido, email, senha, bio e fotos) alem disso tambem temos a opção de desconectar e apagar conta dentro desta pagina.
+                </p>
+            </div>
+            <div class="conteudpsAd">
+                <p>&nbsp;&nbsp;&nbsp;Em relação as outras paginas elas sõa bem intuitivas pr si só, adicionar é para fazer postagens, notificações e perfil de usuario.</p>
+            </div>
             </div>
         </div>
     </article>

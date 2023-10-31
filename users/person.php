@@ -55,7 +55,7 @@ if (isset($_GET["id"])) {
         }
 
         // Consulta SQL para buscar os posts do usuário
-        $posts_sql = "SELECT * FROM posts WHERE id_user = '$id_user' ORDER BY data DESC";
+        $posts_sql = "SELECT nome, imagem, id, data FROM posts WHERE id_user = '$id_user' ORDER BY data DESC";
         $posts_result = $conexao->query($posts_sql);
 
         $sql_numero_seguidores = "SELECT COUNT(*) AS num_seguidores FROM seguidores WHERE seguindo_id = $id_user";
@@ -190,10 +190,12 @@ if (isset($_GET["id"])) {
             while ($row = $posts_result->fetch_assoc()) {
                 $post_id = $row['id'];
                 $post_image = $row['imagem'];
+                $post_nome = $row['nome'];
                 $post_date = $row['data'];
 
                 echo "<div class='post-item result-item post'>";
                 echo "<img src='../$post_image' alt='Imagem do Post' data-id='$post_id'>";
+                echo "<p class='titulosP'>$post_nome</p>";
                 echo "</div>";
             }
         } else {

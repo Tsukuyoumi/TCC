@@ -89,7 +89,7 @@
             }
 
             // Consulta SQL para buscar o ID na tabela "users"
-            $user_sql = "SELECT id, perfil, nick AS name FROM users WHERE nick LIKE '$search_name%'";
+            $user_sql = "SELECT id, perfil, tipoArt, nick AS name FROM users WHERE nick LIKE '$search_name%'";
             $user_result = $conexao->query($user_sql);
 
             // Consulta SQL para buscar o ID na tabela "posts" com filtro de tipoArt
@@ -110,29 +110,32 @@
             <button id="togglePosts" class="toggle-button" onclick="togglePosts()">Artes</button>
         </div>
         <div id="userResults" class="result-list">
-            <div class="name">
-                <?php
-                if (isset($user_result) && $user_result->num_rows > 0) {
-                    while ($row = $user_result->fetch_assoc()) {
-                        if (isset($row["id"]) && isset($row["name"]) && isset($row["perfil"])) {
-                            $user_id = $row["id"];
-                            $user_name = $row["name"];
-                            $perfil = $row["perfil"];
+    <?php
+    if (isset($user_result) && $user_result->num_rows > 0) {
+        while ($row = $user_result->fetch_assoc()) {
+            if (isset($row["id"]) && isset($row["name"]) && isset($row["perfil"]) && isset($row["tipoArt"])) {
+                $user_id = $row["id"];
+                $user_name = $row["name"];
+                $perfil = $row["perfil"];
+                $tipoArtUsuario = $row["tipoArt"];
 
-                            echo "<div class='result-item name'>
-                            <a class='direcao' href='../users/person.php?id=$user_id'>
-                                <img src='../cadastro/$perfil' class='perfil3'>
-                                <h3  class='nomed'> $user_name<h3>
-                            </a>
-                        </div>";
-                        }
-                    }
-                } else {
-                    echo "<p class='no-result-message'>Nenhum usuário encontrado!</p>";
+                // Verifique se o tipoArt do usuário corresponde ao filtro
+                if (empty($tipoArtUsuario) || $tipoArtUsuario === $tipoArtUsuario) {
+                    echo "<div class='result-item name'>
+                    <a class='direcao' href='../users/person.php?id=$user_id'>
+                        <img src='../cadastro/$perfil' class='perfil3'>
+                        <h3  class='nomed'>$user_name</h3>
+                    </a>
+                </div>";
                 }
-                ?>
-            </div>
-        </div>
+            }
+        }
+    } else {
+        echo "<p class='no-result-message'>Nenhum usuário encontrado!</p>";
+    }
+    ?>
+</div>
+
 
 
 
