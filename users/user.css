@@ -1,6 +1,7 @@
 body {
     background-color: rgb(15, 15, 15);
     color: white;
+    font-family: "Nome da Fonte", sans-serif;
 }
 
 /*Sidebar*/
@@ -228,7 +229,7 @@ h3 {
     height: 45px;
     object-fit: cover; /* Isso ajuda a manter a proporção da imagem */
     border-radius: 50%; /* Isso cria um recorte circular na imagem */
-    margin-top: -4px;
+    margin-top: -6px;
 }
 
 #usuario {
@@ -352,7 +353,7 @@ h3 {
 
     /* Alterei "width" para "max-width" */
     .area-imagem {
-        width: 1075px;
+        width: 1065px;
         height: 200px;
         overflow: hidden;
         position: relative;
@@ -391,7 +392,7 @@ h3 {
     position: relative;
     display: inline-block;
     top: 10px;
-    margin-left: 210px;
+    margin-left: 205px;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;

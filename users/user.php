@@ -17,6 +17,7 @@ $perfil = "../cadastro/" . $row["perfil"];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="user.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Lunar</title>
 
 </head>

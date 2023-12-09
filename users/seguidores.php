@@ -21,6 +21,7 @@ if (isset($_GET['id'])) {
 
     <link rel="stylesheet" href="listaS.css">
     <link rel="icon" href="icones/iconinho.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Lunar</title>
 </head>
 

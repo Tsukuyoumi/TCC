@@ -1,6 +1,7 @@
 body {
     background-color: rgb(15, 15, 15);
     color: white;
+    font-family: "Nome da Fonte", sans-serif;
 }
 
 /*Sidebar*/
@@ -131,7 +132,7 @@ article {
     margin-bottom: 40px; 
 }
 .Foto{
-    width: 990px;
+    width: 880px;
     margin-left: -200px;
     margin-top: 30px;
     margin-bottom: 40px;
@@ -150,8 +151,8 @@ article {
     margin-bottom: -20px;
 }
 .posts{
-    margin-left: 810px;
-    margin-top: -545px;
+    margin-left: 690px;
+    margin-top: -475px;
     margin-right: 20px;
     background-color: rgba(255, 255, 255, 0.08);
     padding: 10px;

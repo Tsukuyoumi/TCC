@@ -55,6 +55,7 @@ if ($result->num_rows > 0) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="seguir.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Lunar</title>
 </head>
 

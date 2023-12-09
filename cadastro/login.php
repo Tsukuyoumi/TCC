@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="login.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Lunar</title>
 </head>
 <body>

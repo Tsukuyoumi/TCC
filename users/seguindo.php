@@ -28,6 +28,7 @@ if (isset($_GET['id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="listaS.css">
     <link rel="icon" href="../icones/iconinho.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Lunar</title>
 
 </head>
